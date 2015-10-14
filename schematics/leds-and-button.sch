@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE eagle SYSTEM "eagle.dtd">
-<eagle version="6.1">
+<eagle version="7.4.0">
 <drawing>
 <settings>
 <setting alwaysvectorfont="no"/>
@@ -1624,27 +1624,27 @@ Standard 2-pin 0.1" header. Use with straight break away headers (SKU : PRT-0011
 </class>
 </classes>
 <parts>
-<part name="LED_3.3V" library="SparkFun" deviceset="LED" device="-3MM-NO_SILK"/>
-<part name="LED_5V" library="SparkFun" deviceset="LED" device="-3MM-NO_SILK"/>
-<part name="LED_9V" library="SparkFun" deviceset="LED" device="-3MM-NO_SILK"/>
-<part name="LED_12V" library="SparkFun" deviceset="LED" device="-3MM-NO_SILK"/>
-<part name="LED_ADJV" library="SparkFun" deviceset="LED" device="-3MM-NO_SILK"/>
+<part name="3.3V" library="SparkFun" deviceset="LED" device="-3MM-NO_SILK"/>
+<part name="5V" library="SparkFun" deviceset="LED" device="-3MM-NO_SILK"/>
+<part name="9V" library="SparkFun" deviceset="LED" device="-3MM-NO_SILK"/>
+<part name="12V" library="SparkFun" deviceset="LED" device="-3MM-NO_SILK"/>
+<part name="ADJV" library="SparkFun" deviceset="LED" device="-3MM-NO_SILK"/>
 <part name="JP3" library="SparkFun" deviceset="M08" device="1X08"/>
 <part name="RN1" library="resistor-net" deviceset="RNX5" device="" value="330"/>
 <part name="JP1" library="SparkFun" deviceset="STAND-OFF" device=""/>
 <part name="JP2" library="SparkFun" deviceset="STAND-OFF" device=""/>
-<part name="JP4" library="SparkFun" deviceset="M02" device="PTH"/>
+<part name="BTN" library="SparkFun" deviceset="M02" device="PTH"/>
 </parts>
 <sheets>
 <sheet>
 <plain>
 </plain>
 <instances>
-<instance part="LED_3.3V" gate="G$1" x="10.16" y="25.4"/>
-<instance part="LED_5V" gate="G$1" x="17.78" y="25.4"/>
-<instance part="LED_9V" gate="G$1" x="25.4" y="25.4"/>
-<instance part="LED_12V" gate="G$1" x="33.02" y="25.4"/>
-<instance part="LED_ADJV" gate="G$1" x="40.64" y="25.4"/>
+<instance part="3.3V" gate="G$1" x="10.16" y="25.4"/>
+<instance part="5V" gate="G$1" x="17.78" y="25.4"/>
+<instance part="9V" gate="G$1" x="25.4" y="25.4"/>
+<instance part="12V" gate="G$1" x="33.02" y="25.4"/>
+<instance part="ADJV" gate="G$1" x="40.64" y="25.4"/>
 <instance part="JP3" gate="G$1" x="22.86" y="45.72" rot="R270"/>
 <instance part="RN1" gate="_" x="45.72" y="12.7" rot="R270"/>
 <instance part="RN1" gate="-1" x="40.64" y="15.24" rot="R270"/>
@@ -1654,7 +1654,7 @@ Standard 2-pin 0.1" header. Use with straight break away headers (SKU : PRT-0011
 <instance part="RN1" gate="-5" x="10.16" y="15.24" rot="R270"/>
 <instance part="JP1" gate="G$1" x="2.54" y="15.24"/>
 <instance part="JP2" gate="G$1" x="2.54" y="10.16"/>
-<instance part="JP4" gate="G$1" x="7.62" y="35.56"/>
+<instance part="BTN" gate="G$1" x="7.62" y="35.56"/>
 </instances>
 <busses>
 </busses>
@@ -1665,7 +1665,7 @@ Standard 2-pin 0.1" header. Use with straight break away headers (SKU : PRT-0011
 <pinref part="JP3" gate="G$1" pin="3"/>
 <wire x1="20.32" y1="40.64" x2="20.32" y2="30.48" width="0.1524" layer="91"/>
 <wire x1="20.32" y1="30.48" x2="10.16" y2="30.48" width="0.1524" layer="91"/>
-<pinref part="LED_3.3V" gate="G$1" pin="A"/>
+<pinref part="3.3V" gate="G$1" pin="A"/>
 </segment>
 </net>
 <net name="N$5" class="0">
@@ -1673,14 +1673,14 @@ Standard 2-pin 0.1" header. Use with straight break away headers (SKU : PRT-0011
 <pinref part="JP3" gate="G$1" pin="4"/>
 <wire x1="22.86" y1="40.64" x2="22.86" y2="27.94" width="0.1524" layer="91"/>
 <wire x1="22.86" y1="27.94" x2="17.78" y2="27.94" width="0.1524" layer="91"/>
-<pinref part="LED_5V" gate="G$1" pin="A"/>
+<pinref part="5V" gate="G$1" pin="A"/>
 </segment>
 </net>
 <net name="N$6" class="0">
 <segment>
 <pinref part="JP3" gate="G$1" pin="5"/>
 <wire x1="25.4" y1="40.64" x2="25.4" y2="27.94" width="0.1524" layer="91"/>
-<pinref part="LED_9V" gate="G$1" pin="A"/>
+<pinref part="9V" gate="G$1" pin="A"/>
 </segment>
 </net>
 <net name="N$7" class="0">
@@ -1688,7 +1688,7 @@ Standard 2-pin 0.1" header. Use with straight break away headers (SKU : PRT-0011
 <pinref part="JP3" gate="G$1" pin="6"/>
 <wire x1="27.94" y1="40.64" x2="27.94" y2="27.94" width="0.1524" layer="91"/>
 <wire x1="27.94" y1="27.94" x2="33.02" y2="27.94" width="0.1524" layer="91"/>
-<pinref part="LED_12V" gate="G$1" pin="A"/>
+<pinref part="12V" gate="G$1" pin="A"/>
 </segment>
 </net>
 <net name="N$13" class="0">
@@ -1697,7 +1697,7 @@ Standard 2-pin 0.1" header. Use with straight break away headers (SKU : PRT-0011
 <pinref part="JP3" gate="G$1" pin="7"/>
 <wire x1="30.48" y1="40.64" x2="30.48" y2="30.48" width="0.1524" layer="91"/>
 <wire x1="30.48" y1="30.48" x2="40.64" y2="30.48" width="0.1524" layer="91"/>
-<pinref part="LED_ADJV" gate="G$1" pin="A"/>
+<pinref part="ADJV" gate="G$1" pin="A"/>
 </segment>
 </net>
 <net name="N$1" class="0">
@@ -1711,14 +1711,14 @@ Standard 2-pin 0.1" header. Use with straight break away headers (SKU : PRT-0011
 </net>
 <net name="N$2" class="0">
 <segment>
-<pinref part="LED_3.3V" gate="G$1" pin="C"/>
+<pinref part="3.3V" gate="G$1" pin="C"/>
 <pinref part="RN1" gate="-5" pin="1"/>
 <wire x1="10.16" y1="20.32" x2="10.16" y2="17.78" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="N$3" class="0">
 <segment>
-<pinref part="LED_5V" gate="G$1" pin="C"/>
+<pinref part="5V" gate="G$1" pin="C"/>
 <pinref part="RN1" gate="-4" pin="1"/>
 <wire x1="17.78" y1="20.32" x2="17.78" y2="17.78" width="0.1524" layer="91"/>
 </segment>
@@ -1726,34 +1726,34 @@ Standard 2-pin 0.1" header. Use with straight break away headers (SKU : PRT-0011
 <net name="N$8" class="0">
 <segment>
 <pinref part="RN1" gate="-3" pin="1"/>
-<pinref part="LED_9V" gate="G$1" pin="C"/>
+<pinref part="9V" gate="G$1" pin="C"/>
 <wire x1="25.4" y1="17.78" x2="25.4" y2="20.32" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="N$9" class="0">
 <segment>
 <pinref part="RN1" gate="-2" pin="1"/>
-<pinref part="LED_12V" gate="G$1" pin="C"/>
+<pinref part="12V" gate="G$1" pin="C"/>
 <wire x1="33.02" y1="17.78" x2="33.02" y2="20.32" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="N$10" class="0">
 <segment>
 <pinref part="RN1" gate="-1" pin="1"/>
-<pinref part="LED_ADJV" gate="G$1" pin="C"/>
+<pinref part="ADJV" gate="G$1" pin="C"/>
 <wire x1="40.64" y1="17.78" x2="40.64" y2="20.32" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="N$11" class="0">
 <segment>
 <pinref part="JP3" gate="G$1" pin="1"/>
-<pinref part="JP4" gate="G$1" pin="2"/>
+<pinref part="BTN" gate="G$1" pin="2"/>
 <wire x1="15.24" y1="38.1" x2="15.24" y2="40.64" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="N$12" class="0">
 <segment>
-<pinref part="JP4" gate="G$1" pin="1"/>
+<pinref part="BTN" gate="G$1" pin="1"/>
 <wire x1="15.24" y1="35.56" x2="17.78" y2="35.56" width="0.1524" layer="91"/>
 <wire x1="17.78" y1="35.56" x2="17.78" y2="38.1" width="0.1524" layer="91"/>
 <pinref part="JP3" gate="G$1" pin="2"/>
