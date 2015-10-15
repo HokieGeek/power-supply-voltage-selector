@@ -1,7 +1,7 @@
-#include <stdint.h>
-#include <avr/io.h>
+#ifndef _SHIFTREGISTER_H_
+#define _SHIFTREGISTER_H_
 
-// TODO: struct that defines the shift register pins and gets passed around to these methods
+#include <stdint.h>
 
 typedef struct {
     int data;
@@ -10,9 +10,12 @@ typedef struct {
     int reset;
 } ShiftRegister;
 
+// #define 
 
-void ToggleShiftClock(int pin);
-void ToggleLatchClock(int pin);
-void ResetRegister(int pin);
-void ShiftBytes(const ShiftRegister* const reg, uint8_t data) {
-const ShiftRegister* const InitShiftRegister(int data, int latchClock, int shiftClock, int reset);
+void ToggleShiftClock(const ShiftRegister *const reg);
+void ToggleLatchClock(const ShiftRegister *const reg);
+void ResetRegister(const ShiftRegister *const reg);
+void ShiftBytes(const ShiftRegister *const reg, uint8_t data);
+const ShiftRegister *const InitShiftRegister(int data, int latchClock, int shiftClock, int reset);
+
+#endif // _SHIFTREGISTER_H_
