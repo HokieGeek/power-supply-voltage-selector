@@ -5,6 +5,9 @@
 #include <avr/sleep.h>
 #include <util/delay.h>
 
+#include "eeprom.h"
+#include "shiftregister.h"
+
 //#define TIMER_PRESCALE ~(1<<WDP0)&~(1<<WDP1)&~(1<<WDP2)&~(1<<WDP3) // 16ms
 #define TIMER_PRESCALE_MILLIS 16
 //#define TIMER_PRESCALE (1<<WDP0) // 32ms
@@ -43,6 +46,7 @@ typedef struct {
 } BUTTON_ITEM;
 
 BUTTON_ITEM* handledButtons;
+const ShiftRegister *const shiftReg;
 
 uint8_t currentVoltage = OPTIONS_RANGE_START;
 
@@ -55,69 +59,6 @@ long clock_diff(long old_clock, long new_clock) {
     return new_clock - old_clock;
   else
     return new_clock + (65535 - old_clock);
-}
-
-/* ================ EEPROM ================ */
-void EEPROM_write(uint8_t address, uint8_t data) {
-    while (EECR & (1<<EEPE)) {} // Wait for completion of previous write
-
-    EECR = (0<<EEPM1) | (0<<EEPM0); // Set Programming mode
-
-    // Set up address and data registers
-    EEAR = address;
-    EEDR = data;
-
-    EECR |= (1<<EEMPE); // Write logical one to EEMPE
-    EECR |= (1<<EEPE); // Start eeprom write by setting EEPE
-}
-
-uint8_t EEPROM_read(uint8_t address) {
-    while (EECR & (1<<EEPE)) {} // Wait for completion of previous write
-
-    EEAR = address; // Set up address register
-    EECR |= (1<<EERE); // Start eeprom read by writing EERE
-
-    return EEDR; // Return data from data register
-}
-
-/* ================ SHIFT REG ================ */
-void toggleShiftClock() {
-    PORTB |= (1<<SREG_PIN_SHIFTCLOCK);
-    PORTB &= ~(1<<SREG_PIN_SHIFTCLOCK);
-}
- 	
-void toggleLatchClock() {
-    PORTB |= (1<<SREG_PIN_LATCHCLOCK);
-    _delay_ms(3);
-    PORTB &= ~(1<<SREG_PIN_LATCHCLOCK);
-    _delay_ms(3);
-}
-
-void resetRegister() {
-    PORTB &= ~(1<<SREG_PIN_RESET);
-    _delay_ms(10);
-    PORTB |= (1<<SREG_PIN_RESET);
-    _delay_ms(10);
-}
-
-void shiftBytes(uint8_t data) {
-    for (uint8_t i = 0; i < 8; i++) {
-        if ((data & (1 << i))) {
-            PORTB |= (1 << SREG_PIN_DATA);
-        } else {
-            PORTB &= ~(1 << SREG_PIN_DATA);
-        }
-	    toggleShiftClock();
-    }
-	toggleLatchClock();
-}
-
-void initShiftRegister() {
-    DDRB |= ((1<<SREG_PIN_DATA)|(1<<SREG_PIN_LATCHCLOCK)|(1<<SREG_PIN_SHIFTCLOCK)|(1<<SREG_PIN_RESET));
-
-    resetRegister();  // Toggle the Reset Pin on the 595 to clear out SR
-
-    shiftBytes(currentVoltage);
 }
 
 /* ================ BUTTONS ================ */
@@ -189,7 +130,7 @@ void startTimer() {
 
 void stopTimer() {
     // Stop the WDT
-    WDTCR &= ~(1<<WDIE); // Enable watchdog timer interrupts
+    WDTCR &= ~(1<<WDIE); // Disable watchdog timer interrupts
     elapsedTime = 0L;
     timerEnabled = 0;
 }
@@ -221,12 +162,13 @@ void buttonHandler(int btnId, int state, int clickCount) {
             nextVoltage();
             EEPROM_write(SELECTED_VOLTAGE_ADDRESS, currentVoltage);
         }
-       break; 
+       break;
     }
 }
 
 void init_pins() {
-    initShiftRegister();
+    shiftReg = InitShiftRegister(SREG_PIN_DATA, SREG_PIN_LATCHCLOCK,
+                                 SREG_PIN_SHIFTCLOCK, SREG_PIN_RESET);
 
     // DDRB |= (1 << BUTTON_PIN); // pull-up resistor
 
@@ -262,6 +204,8 @@ int main(void) {
 
     init_pins();
     init_interrupts();
+
+    ShiftBytes(shiftReg, currentVoltage);
 
     set_sleep_mode(SLEEP_MODE_PWR_DOWN); // Use the Power Down sleep mode
 
