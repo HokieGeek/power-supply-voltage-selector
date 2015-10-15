@@ -1,58 +1,51 @@
 #include "shiftregister.h"
 
-// #define SREG_PIN_DATA PB1
-// #define SREG_PIN_LATCHCLOCK PB2
-// #define SREG_PIN_SHIFTCLOCK PB3
-// #define SREG_PIN_RESET PB4
+#include <avr/io.h>
+#include <util/delay.h>
 
-/* ================ SHIFT REG ================ */
-void ToggleShiftClock(int pin) {
-    // PORTB |= (1<<SREG_PIN_SHIFTCLOCK);
-    // PORTB &= ~(1<<SREG_PIN_SHIFTCLOCK);
-    PORTB |= (1<<pin);
-    PORTB &= ~(1<<pin);
+void ToggleShiftClock(const ShiftRegister *const reg);
+    PORTB |= (1<<reg->shiftClock);
+    PORTB &= ~(1<<reg->shiftClock);
 }
 
-void ToggleLatchClock(int pin) {
-    // PORTB |= (1<<SREG_PIN_LATCHCLOCK);
-    PORTB |= (1<<pin);
+void ToggleLatchClock(const ShiftRegister *const reg);
+    PORTB |= (1<<reg->latchClock);
     _delay_ms(3);
-    // PORTB &= ~(1<<SREG_PIN_LATCHCLOCK);
-    PORTB &= ~(1<<pin);
+    PORTB &= ~(1<<reg->latchClock);
     _delay_ms(3);
 }
 
-void ResetRegister(int pin) {
-    // PORTB &= ~(1<<SREG_PIN_RESET);
-    PORTB &= ~(1<<pin);
+void ResetRegister(const ShiftRegister *const reg);
+    PORTB &= ~(1<<reg->reset);
     _delay_ms(10);
-    // PORTB |= (1<<SREG_PIN_RESET);
-    PORTB |= (1<<pin);
+    PORTB |= (1<<reg->reset);
     _delay_ms(10);
 }
 
 void ShiftBytes(const ShiftRegister* const reg, uint8_t data) {
     for (uint8_t i = 0; i < 8; i++) {
         if ((data & (1 << i))) {
-            // PORTB |= (1 << SREG_PIN_DATA);
             PORTB |= (1 << reg.data);
         } else {
-            // PORTB &= ~(1 << SREG_PIN_DATA);
             PORTB &= ~(1 << reg.data);
         }
-        // toggleShiftClock();
-        toggleShiftClock(reg.shiftClock);
+        ToggleShiftClock(reg);
     }
-    // toggleLatchClock();
-    toggleLatchClock(reg.latchClock);
+    ToggleLatchClock(reg);
 }
 
-// void initShiftRegister() {
 const ShiftRegister* const InitShiftRegister(int data, int latchClock, int shiftClock, int reset);
-    DDRB |= ((1<<SREG_PIN_DATA)|(1<<SREG_PIN_LATCHCLOCK)|(1<<SREG_PIN_SHIFTCLOCK)|(1<<SREG_PIN_RESET));
+    // FIXME
+    ShiftRegister* reg = (ShiftRegister*)malloc(sizeof(ShiftRegister));
+    reg->data = data;
+    reg->latchClock = latchClock;
+    reg->shiftClock = shiftClock;
+    reg->reset = reset;
+
+    DDRB |= ((1<<reg->data)|(1<<reg->latchClock)|(1<<reg->shiftClock)|(1<<reg->reset));
 
     ResetRegister();  // Toggle the Reset Pin on the 595 to clear out SR
 
-    // shiftBytes(currentVoltage);
+    return reg;
 }
 
