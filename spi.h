@@ -3,6 +3,11 @@
 
 #include <stdint.h>
 
+// typedef enum {
+//     3WIRE,
+//     5WIRE
+// } SpiDeviceTypeEnum;
+
 typedef struct {
     int chipSelect;
     int serialClock;
