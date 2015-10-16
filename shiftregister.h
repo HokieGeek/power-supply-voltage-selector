@@ -1,5 +1,5 @@
-#ifndef _SHIFTREGISTER_H_
-#define _SHIFTREGISTER_H_
+#ifndef __SHIFTREGISTER_H__
+#define __SHIFTREGISTER_H__
 
 #include <stdint.h>
 
@@ -17,3 +17,5 @@ void ToggleLatchClock(ShiftRegister *const reg);
 void ResetShiftRegister(ShiftRegister *const reg);
 void ShiftBytes(ShiftRegister *const reg, uint8_t data);
 ShiftRegister *const InitShiftRegister(int data, int latchClock, int shiftClock, int reset);
+
+#endif //__SHIFTREGISTER_H__

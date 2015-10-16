@@ -1,25 +1,18 @@
-#ifndef _SPI_H_
-#define _SPI_H_
+#ifndef __SPI_H__
+#define __SPI_H__
 
 #include <stdint.h>
 
-typedef enum {
-    3WIRE,
-    5WIRE
-} SpiDeviceTypeEnum;
-
 typedef struct {
     int chipSelect;
-    int serialDataInput;
     int serialClock;
-} SpiDevice3Wire;
+    int serialDataInput;
+} SpiDevice;
 
-// #define 
+void SetChipSelectHigh(SpiDevice *const dev);
+void SetChipSelectLow(SpiDevice *const dev);
+void ToggleSerialClock(SpiDevice *const dev);
+void WriteBytes(SpiDevice *const dev, int numBytes, uint8_t data[]);
+SpiDevice *const Init3WireSpiDevice(int chipSelect, int serialClock, int serialDataInput);
 
-void ToggleSerialClock(const SpiDevice *const dev);
-// void ResetDevice(const SpiDevice *const dev);
-void WriteData(const SpiDevice *const dev, uint8_t data);
-const SpiDevice *const Init3WireSpiDevice(int chipSelect, int serialDataInput, int serialClock);
-// const SpiDevice *const Init5WireSpiDevice(int chipSelect, int serialDataInput, int serialClock);
-
-#endif // _SPI_H_
+#endif //__SPI_H__

@@ -5,7 +5,7 @@ programmer=usbtiny
 port=usb
 CC=avr-gcc
 
-DEPS = eeprom.h shiftregister.h # spi.h
+DEPS = eeprom.h shiftregister.h spi.h
 OBJ = $(prog).o $(DEPS:.h=.o)
 
 all: $(prog).eep $(prog).lss $(prog).sym 

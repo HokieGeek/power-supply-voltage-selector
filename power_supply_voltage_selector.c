@@ -7,6 +7,7 @@
 
 #include "eeprom.h"
 #include "shiftregister.h"
+#include "spi.h"
 
 //#define TIMER_PRESCALE ~(1<<WDP0)&~(1<<WDP1)&~(1<<WDP2)&~(1<<WDP3) // 16ms
 #define TIMER_PRESCALE_MILLIS 16
@@ -139,8 +140,7 @@ ISR(WDT_vect) {
 }
 
 ISR (PCINT0_vect) {
-    // TODO: need to figure out which button was pressed
-    //       PCINT****0**** denotes that PB0 was pressed
+    // PCINT****0**** denotes that PB0 was pressed
     BUTTON_ITEM* btn = debouncedButton(BUTTON_PIN);
     btn->handler(btn->pinId, btn->state, btn->clickCount);
 }
@@ -157,6 +157,7 @@ void buttonHandler(int btnId, int state, int clickCount) {
     case BUTTON_PIN:
         if (state && clickCount == 2) {
             nextVoltage();
+            // TODO: Adjust Pot
             EEPROM_write(SELECTED_VOLTAGE_ADDRESS, currentVoltage);
         }
        break;
@@ -184,6 +185,7 @@ void init_interrupts() {
     sei(); // Enable global interrupts 
 }
 
+/*
 int main(void) {
     // 1. Read EEPROM for previous setting, set respective pins to high
     // 2. Go to sleep and wait for a button to be pushed
@@ -208,5 +210,30 @@ int main(void) {
 
     for (;;) {
         sleep_mode();   // go to sleep and wait for interrupt...
+    }
+}
+*/
+
+#define MCP41010_COMMAND_BYTE 0b00010001
+void MCP41010_write(SpiDevice *const dev, uint8_t value) {
+    uint8_t input[2];
+    input[0] = MCP41010_COMMAND_BYTE;
+    input[1] = value;
+
+    WriteBytes(dev, 2, input);
+}
+
+int main(void) {
+    SpiDevice *const spi = Init3WireSpiDevice(PB4, PB3, PB1);
+
+    for (int level = 0; level < 255; level++) {
+        MCP41010_write(spi, level);
+        _delay_ms(100);
+    }
+    _delay_ms(2000);
+
+    for (int level = 255; level > 0; level--) {
+        MCP41010_write(spi, level);
+        _delay_ms(100);
     }
 }
