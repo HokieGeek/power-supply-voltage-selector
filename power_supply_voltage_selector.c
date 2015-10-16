@@ -186,6 +186,7 @@ void init_interrupts() {
 }
 
 /*
+*/
 int main(void) {
     // 1. Read EEPROM for previous setting, set respective pins to high
     // 2. Go to sleep and wait for a button to be pushed
@@ -212,8 +213,8 @@ int main(void) {
         sleep_mode();   // go to sleep and wait for interrupt...
     }
 }
-*/
 
+/*
 #define MCP41010_COMMAND_BYTE 0b00010001
 void MCP41010_write(SpiDevice *const dev, uint8_t value) {
     uint8_t input[2];
@@ -237,3 +238,4 @@ int main(void) {
         _delay_ms(100);
     }
 }
+*/
