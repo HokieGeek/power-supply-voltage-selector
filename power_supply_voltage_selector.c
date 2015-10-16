@@ -186,7 +186,6 @@ void init_interrupts() {
 }
 
 /*
-*/
 int main(void) {
     // 1. Read EEPROM for previous setting, set respective pins to high
     // 2. Go to sleep and wait for a button to be pushed
@@ -213,8 +212,12 @@ int main(void) {
         sleep_mode();   // go to sleep and wait for interrupt...
     }
 }
+*/
 
-/*
+#define DIGIPOT_PIN_DATA PB1
+#define DIGIPOT_PIN_CHIPSELECT PB2
+#define DIGIPOT_PIN_SERIALCLOCK PB3
+
 #define MCP41010_COMMAND_BYTE 0b00010001
 void MCP41010_write(SpiDevice *const dev, uint8_t value) {
     uint8_t input[2];
@@ -225,7 +228,9 @@ void MCP41010_write(SpiDevice *const dev, uint8_t value) {
 }
 
 int main(void) {
-    SpiDevice *const spi = Init3WireSpiDevice(PB4, PB3, PB1);
+    SpiDevice *const spi = Init3WireSpiDevice(DIGIPOT_PIN_DATA,
+                                              DIGIPOT_PIN_CHIPSELECT,
+                                              DIGIPOT_PIN_SERIALCLOCK);
 
     for (int level = 0; level < 255; level++) {
         MCP41010_write(spi, level);
@@ -238,4 +243,5 @@ int main(void) {
         _delay_ms(100);
     }
 }
+/*
 */
