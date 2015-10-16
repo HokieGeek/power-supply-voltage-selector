@@ -17,7 +17,10 @@ typedef struct {
 void SetChipSelectHigh(SpiDevice *const dev);
 void SetChipSelectLow(SpiDevice *const dev);
 void ToggleSerialClock(SpiDevice *const dev);
-void WriteBytes(SpiDevice *const dev, int numBytes, uint8_t data[]);
+void SpiWriteBytes(SpiDevice *const dev, int numBytes, uint8_t data[]);
 SpiDevice *const Init3WireSpiDevice(int chipSelect, int serialClock, int serialDataInput);
+
+// void InitSpiMaster(void);
+// void SpiSend(uint8_t data);
 
 #endif //__SPI_H__
