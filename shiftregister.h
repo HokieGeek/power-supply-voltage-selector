@@ -12,10 +12,8 @@ typedef struct {
 
 // #define 
 
-void ToggleShiftClock(const ShiftRegister *const reg);
-void ToggleLatchClock(const ShiftRegister *const reg);
-void ResetRegister(const ShiftRegister *const reg);
-void ShiftBytes(const ShiftRegister *const reg, uint8_t data);
-const ShiftRegister *const InitShiftRegister(int data, int latchClock, int shiftClock, int reset);
-
-#endif // _SHIFTREGISTER_H_
+void ToggleShiftClock(ShiftRegister *const reg);
+void ToggleLatchClock(ShiftRegister *const reg);
+void ResetShiftRegister(ShiftRegister *const reg);
+void ShiftBytes(ShiftRegister *const reg, uint8_t data);
+ShiftRegister *const InitShiftRegister(int data, int latchClock, int shiftClock, int reset);

@@ -46,11 +46,11 @@ typedef struct {
 } BUTTON_ITEM;
 
 BUTTON_ITEM* handledButtons;
-const ShiftRegister *const shiftReg;
+ShiftRegister *shiftReg;
 
 uint8_t currentVoltage = OPTIONS_RANGE_START;
 
-/* ================ TIME ================ */
+// ================ TIME ================ //
 long elapsedTime = 0;
 uint8_t timerEnabled = 0;
 
@@ -61,11 +61,8 @@ long clock_diff(long old_clock, long new_clock) {
     return new_clock + (65535 - old_clock);
 }
 
-/* ================ BUTTONS ================ */
+// ================ BUTTONS ================ //
 BUTTON_ITEM* debouncedButton(int pin) {
-    /*
-    */
-
     BUTTON_ITEM* btn = &handledButtons[pin];
 
     if (timerEnabled == 0) {
@@ -152,7 +149,7 @@ void nextVoltage() {
     currentVoltage = currentVoltage >> 1;
     if (currentVoltage & OPTIONS_RANGE_END)
         currentVoltage = OPTIONS_RANGE_START;
-    shiftBytes(currentVoltage);
+    ShiftBytes(shiftReg, currentVoltage);
 }
 
 void buttonHandler(int btnId, int state, int clickCount) {
@@ -180,7 +177,7 @@ void init_interrupts() {
     PCMSK |= (1<<PCINT0); // Enable external interrupts PCINT0
     MCUCR  = (1<<ISC00);
     GIMSK |= (1<<PCIE); // Pin Change Interrupt Enable
- 
+
     // WDTCR |= TIMER_PRESCALE;
     // WDTCR |= (1<<WDIE); // Enable watchdog timer interrupts
 

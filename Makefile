@@ -5,14 +5,14 @@ programmer=usbtiny
 port=usb
 CC=avr-gcc
 
-DEPS = # eeprom.h # shiftregister.h # spi.h
+DEPS = eeprom.h shiftregister.h # spi.h
 OBJ = $(prog).o $(DEPS:.h=.o)
 
 all: $(prog).eep $(prog).lss $(prog).sym 
 
 %.o: %.c $(DEPS)
 	@echo "== Compiling object file: $@" && \
-	$(CC) -c -mdeb -mmcu=$(chip) -I. -gdwarf-2 $(cpu_freq) -Os -funsigned-char -funsigned-bitfields -fpack-struct -fshort-enums -Wall -Wstrict-prototypes -Wa,-adhlns=./$@.lst -std=gnu99 $< -o $@ >/dev/null 2>&1 || true
+	$(CC) -c -mdeb -mmcu=$(chip) -I. -gdwarf-2 $(cpu_freq) -Os -funsigned-char -funsigned-bitfields -fpack-struct -fshort-enums -Wall -Wstrict-prototypes -Wa,-adhlns=./$@.lst -std=gnu99 $< -o $@ || true
 
 $(prog).eep: $(prog).elf
 	@echo "== Creating load file for EEPROM" && \
