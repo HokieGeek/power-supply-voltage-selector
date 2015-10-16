@@ -224,7 +224,7 @@ void MCP41010_write(SpiDevice *const dev, uint8_t value) {
     input[0] = MCP41010_COMMAND_BYTE;
     input[1] = value;
 
-    WriteBytes(dev, 2, input);
+    SpiWriteBytes(dev, 2, input);
 }
 
 int main(void) {
@@ -232,6 +232,12 @@ int main(void) {
                                               DIGIPOT_PIN_CHIPSELECT,
                                               DIGIPOT_PIN_SERIALCLOCK);
 
+    uint8_t input[2];
+    input[0] = MCP41010_COMMAND_BYTE;
+    input[1] = 0b11111111;
+    SpiWriteBytes(dev, 2, input);
+    
+    /*
     for (int level = 0; level < 255; level++) {
         MCP41010_write(spi, level);
         _delay_ms(100);
@@ -242,6 +248,7 @@ int main(void) {
         MCP41010_write(spi, level);
         _delay_ms(100);
     }
+    */
 }
 /*
 */
