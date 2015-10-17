@@ -32,6 +32,11 @@
 #define SREG_PIN_SHIFTCLOCK PB3
 #define SREG_PIN_RESET PB4
 
+#define DIGIPOT_PIN_DATA PB1
+#define DIGIPOT_PIN_SERIALCLOCK PB2
+#define DIGIPOT_PIN_CHIPSELECT PB3
+#define MCP41010_COMMAND_BYTE 0b00010001
+
 #define OPTIONS_RANGE_START 0b01000000
 #define OPTIONS_RANGE_END 0b00000010
 
@@ -48,6 +53,7 @@ typedef struct {
 
 BUTTON_ITEM* handledButtons;
 ShiftRegister *shiftReg;
+SpiDevice *spi;
 
 uint8_t currentVoltage = OPTIONS_RANGE_START;
 
@@ -164,6 +170,15 @@ void buttonHandler(int btnId, int state, int clickCount) {
     }
 }
 
+void MCP41010_write(SpiDevice *const dev, uint8_t value) {
+
+    uint8_t input[2];
+    input[0] = MCP41010_COMMAND_BYTE;
+    input[1] = value;
+
+    SpiWriteBytes(dev, 2, input);
+}
+
 void init_pins() {
     shiftReg = InitShiftRegister(SREG_PIN_DATA, SREG_PIN_LATCHCLOCK,
                                  SREG_PIN_SHIFTCLOCK, SREG_PIN_RESET);
@@ -214,41 +229,20 @@ int main(void) {
 }
 */
 
-#define DIGIPOT_PIN_DATA PB1
-#define DIGIPOT_PIN_CHIPSELECT PB2
-#define DIGIPOT_PIN_SERIALCLOCK PB3
-
-#define MCP41010_COMMAND_BYTE 0b00010001
-void MCP41010_write(SpiDevice *const dev, uint8_t value) {
-    uint8_t input[2];
-    input[0] = MCP41010_COMMAND_BYTE;
-    input[1] = value;
-
-    SpiWriteBytes(dev, 2, input);
-}
-
 int main(void) {
-    SpiDevice *const spi = Init3WireSpiDevice(DIGIPOT_PIN_DATA,
-                                              DIGIPOT_PIN_CHIPSELECT,
-                                              DIGIPOT_PIN_SERIALCLOCK);
+    spi = Init3WireSpiDevice(DIGIPOT_PIN_CHIPSELECT,
+                             DIGIPOT_PIN_SERIALCLOCK,
+                             DIGIPOT_PIN_DATA);
+    while(1) {
+        for (int level = 0; level < 255; level++) {
+            MCP41010_write(spi, level);
+            _delay_ms(10);
+        }
+        _delay_ms(1500);
 
-    uint8_t input[2];
-    input[0] = MCP41010_COMMAND_BYTE;
-    input[1] = 0b11111111;
-    SpiWriteBytes(dev, 2, input);
-    
-    /*
-    for (int level = 0; level < 255; level++) {
-        MCP41010_write(spi, level);
-        _delay_ms(100);
+        for (int level = 255; level > 0; level--) {
+            MCP41010_write(spi, level);
+            _delay_ms(10);
+        }
     }
-    _delay_ms(2000);
-
-    for (int level = 255; level > 0; level--) {
-        MCP41010_write(spi, level);
-        _delay_ms(100);
-    }
-    */
 }
-/*
-*/
