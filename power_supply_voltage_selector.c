@@ -183,6 +183,10 @@ void init_pins() {
     shiftReg = InitShiftRegister(SREG_PIN_DATA, SREG_PIN_LATCHCLOCK,
                                  SREG_PIN_SHIFTCLOCK, SREG_PIN_RESET);
 
+    spi = Init3WireSpiDevice(DIGIPOT_PIN_CHIPSELECT,
+                             DIGIPOT_PIN_SERIALCLOCK,
+                             DIGIPOT_PIN_DATA);
+
     // DDRB |= (1 << BUTTON_PIN); // pull-up resistor
 
     buttonsInit(1);
@@ -201,6 +205,7 @@ void init_interrupts() {
 }
 
 /*
+*/
 int main(void) {
     // 1. Read EEPROM for previous setting, set respective pins to high
     // 2. Go to sleep and wait for a button to be pushed
@@ -227,12 +232,11 @@ int main(void) {
         sleep_mode();   // go to sleep and wait for interrupt...
     }
 }
-*/
 
+/*
 int main(void) {
-    spi = Init3WireSpiDevice(DIGIPOT_PIN_CHIPSELECT,
-                             DIGIPOT_PIN_SERIALCLOCK,
-                             DIGIPOT_PIN_DATA);
+    init_pins();
+
     while(1) {
         for (int level = 0; level < 255; level++) {
             MCP41010_write(spi, level);
@@ -246,3 +250,4 @@ int main(void) {
         }
     }
 }
+*/
