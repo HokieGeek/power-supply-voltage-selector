@@ -32,7 +32,7 @@
 #define SREG_PIN_SHIFTCLOCK PB3
 #define SREG_PIN_RESET PB4
 
-#define DIGIPOT_PIN_DATA PB1
+#define DIGIPOT_PIN_DATA PB5
 #define DIGIPOT_PIN_SERIALCLOCK PB2
 #define DIGIPOT_PIN_CHIPSELECT PB3
 #define MCP41010_WRITE_COMMAND_BYTE 0b00010001
@@ -181,15 +181,14 @@ void voltageSelectionsInit(int numVoltages) {
 }
 
 void setVoltageSelection(int selection) {
-    // TODO: Adjust Pot
-    /*
-    if (selection == NUM_VOLTAGE_SELECTIONS-1) {
+    // Adjust the pot
     uint8_t potDataByte = voltageSelections[selection].potData;
     if (potDataByte == 0) {
         MCP41010_shutdown(spi);
     } else {
         MCP41010_write(spi, potDataByte);
     }
+    /*
     */
 
     // Set the LEDs
@@ -273,8 +272,6 @@ void init() {
     setVoltageSelection(currentVoltageSelection);
 }
 
-/*
-*/
 int main(void) {
     // 1. Read EEPROM for previous setting, set respective pins to high
     // 2. Go to sleep and wait for a button to be pushed
@@ -293,6 +290,8 @@ int main(void) {
         sleep_mode();   // go to sleep and wait for interrupt...
     }
 }
+/*
+*/
 
 /*
 int main(void) {
@@ -303,6 +302,8 @@ int main(void) {
             MCP41010_write(spi, level);
             _delay_ms(10);
         }
+        _delay_ms(1500);
+        MCP41010_shutdown(spi);
         _delay_ms(1500);
 
         for (int level = 255; level > 0; level--) {
