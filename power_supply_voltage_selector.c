@@ -34,13 +34,23 @@
 
 #define DIGIPOT_PIN_DATA PB1
 #define DIGIPOT_PIN_SERIALCLOCK PB2
-#define DIGIPOT_PIN_CHIPSELECT PB4
-#define MCP41010_COMMAND_BYTE 0b00010001
+#define DIGIPOT_PIN_CHIPSELECT PB3
+#define MCP41010_WRITE_COMMAND_BYTE 0b00010001
+#define MCP41010_SHUTDOWN_COMMAND_BYTE 0b00100001
 
-#define OPTIONS_RANGE_START 0b01000000
-#define OPTIONS_RANGE_END 0b00000010
+#define NUM_VOLTAGE_SELECTIONS 5
+#define SELECTED_VOLTAGE_EEPROM_ADDRESS 0b01000000
 
-#define SELECTED_VOLTAGE_ADDRESS 0b01000000
+typedef struct {
+    uint8_t led;
+    uint8_t potData;
+} VoltageSelection;
+
+uint8_t currentVoltageSelection = 0;
+VoltageSelection* voltageSelections;
+
+ShiftRegister *shiftReg;
+SpiDevice *spi;
 
 typedef struct {
     int pinId;
@@ -52,10 +62,6 @@ typedef struct {
 } BUTTON_ITEM;
 
 BUTTON_ITEM* handledButtons;
-ShiftRegister *shiftReg;
-SpiDevice *spi;
-
-uint8_t currentVoltage = OPTIONS_RANGE_START;
 
 // ================ TIME ================ //
 long elapsedTime = 0;
@@ -151,29 +157,78 @@ ISR (PCINT0_vect) {
     btn->handler(btn->pinId, btn->state, btn->clickCount);
 }
 
-void nextVoltage() {
-    currentVoltage = currentVoltage >> 1;
-    if (currentVoltage & OPTIONS_RANGE_END)
-        currentVoltage = OPTIONS_RANGE_START;
-    ShiftBytes(shiftReg, currentVoltage);
+void voltageSelectionsInit(int numVoltages) {
+    int size = sizeof(VoltageSelection)*numVoltages;
+    voltageSelections = (VoltageSelection*)malloc(size);
+    memset(voltageSelections, 0, size);
+
+    // Initialize the selections
+    //// 3.3v
+    voltageSelections[0].led = 0b01000000;
+    voltageSelections[0].potData = 43;
+    //// 5v
+    voltageSelections[1].led = 0b00100000;
+    voltageSelections[1].potData = 76;
+    //// 9v
+    voltageSelections[2].led = 0b00010000;
+    voltageSelections[2].potData = 161;
+    //// 12v
+    voltageSelections[3].led = 0b00001000;
+    voltageSelections[3].potData = 224;
+    //// Adj
+    voltageSelections[4].led = 0b00000100;
+    voltageSelections[4].potData = 0;
+}
+
+void setVoltageSelection(int selection) {
+    // TODO: Adjust Pot
+    /*
+    if (selection == NUM_VOLTAGE_SELECTIONS-1) {
+    uint8_t potDataByte = voltageSelections[selection].potData;
+    if (potDataByte == 0) {
+        MCP41010_shutdown(spi);
+    } else {
+        MCP41010_write(spi, potDataByte);
+    }
+    */
+
+    // Set the LEDs
+    ShiftBytes(shiftReg, voltageSelections[selection].led);
+
+    // Store in memory
+    currentVoltageSelection = selection;
+    EEPROM_write(SELECTED_VOLTAGE_EEPROM_ADDRESS, selection);
+}
+
+int nextVoltage() {
+    int next = currentVoltageSelection + 1;
+    if (next == NUM_VOLTAGE_SELECTIONS) {
+        next = 0;
+    }
+    return next;
 }
 
 void buttonHandler(int btnId, int state, int clickCount) {
     switch (btnId) {
     case BUTTON_PIN:
         if (state && clickCount == 2) {
-            nextVoltage();
-            // TODO: Adjust Pot
-            EEPROM_write(SELECTED_VOLTAGE_ADDRESS, currentVoltage);
+            setVoltageSelection(nextVoltage());
         }
        break;
     }
 }
 
-void MCP41010_write(SpiDevice *const dev, uint8_t value) {
-
+void MCP41010_shutdown(SpiDevice *const dev) {
     uint8_t input[2];
-    input[0] = MCP41010_COMMAND_BYTE;
+    input[0] = MCP41010_SHUTDOWN_COMMAND_BYTE;
+    input[1] = 0b00000000;
+
+    SpiWriteBytes(dev, 2, input);
+}
+
+void MCP41010_write(SpiDevice *const dev, uint8_t value) {
+    uint8_t input[2];
+    input[0] = MCP41010_WRITE_COMMAND_BYTE;
     input[1] = value;
 
     SpiWriteBytes(dev, 2, input);
@@ -195,11 +250,10 @@ void init_pins() {
 
     // DDRB |= (1 << BUTTON_PIN); // pull-up resistor
 
-    buttonsInit(1);
-    addButton(BUTTON_PIN, &buttonHandler);
 }
 
 void init_interrupts() {
+    // Do the interrupts
     PCMSK |= (1<<PCINT0); // Enable external interrupts PCINT0
     MCUCR  = (1<<ISC00);
     GIMSK |= (1<<PCIE); // Pin Change Interrupt Enable
@@ -210,6 +264,21 @@ void init_interrupts() {
     sei(); // Enable global interrupts 
 }
 
+void init() {
+    init_pins();
+
+    buttonsInit(1);
+    addButton(BUTTON_PIN, &buttonHandler);
+
+    voltageSelectionsInit(NUM_VOLTAGE_SELECTIONS);
+
+    init_interrupts();
+
+    // Set all initial values
+    uint8_t currentVoltageSelection = EEPROM_read(SELECTED_VOLTAGE_EEPROM_ADDRESS);
+    setVoltageSelection(currentVoltageSelection);
+}
+
 /*
 int main(void) {
     // 1. Read EEPROM for previous setting, set respective pins to high
@@ -217,19 +286,11 @@ int main(void) {
     // 3. Wake up when a button is pushed
     // 4. Determine which button (decode)
     // 5. If valid, write it to EEPROM
-    // 6. Set respective pins
-    // 7. Go back to bed
+    // 6. Set the pot value
+    // 7. Set the LEDs
+    // 8. Go back to bed
 
-    uint8_t currVal = EEPROM_read(SELECTED_VOLTAGE_ADDRESS);
-    // if (currVal & 0b11111111)
-        // currVal = OPTIONS_RANGE_START;
-    // TODO: some checks
-    currentVoltage = currVal;
-
-    init_pins();
-    init_interrupts();
-
-    ShiftBytes(shiftReg, currentVoltage);
+    init();
 
     set_sleep_mode(SLEEP_MODE_PWR_DOWN); // Use the Power Down sleep mode
 
