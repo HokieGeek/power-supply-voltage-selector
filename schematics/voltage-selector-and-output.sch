@@ -13810,6 +13810,11 @@ Standard 0603 ceramic capacitor, and 0.1" leaded capacitor.</description>
 <wire x1="33.02" y1="63.5" x2="33.02" y2="83.82" width="0.1524" layer="91"/>
 <label x="33.02" y="83.82" size="1.778" layer="95"/>
 </segment>
+<segment>
+<pinref part="IC3" gate="P1" pin="SI"/>
+<wire x1="43.18" y1="139.7" x2="45.72" y2="139.7" width="0.1524" layer="91"/>
+<label x="45.72" y="139.7" size="1.778" layer="95"/>
+</segment>
 </net>
 <net name="PB2" class="0">
 <segment>
@@ -13844,11 +13849,6 @@ Standard 0603 ceramic capacitor, and 0.1" leaded capacitor.</description>
 <pinref part="IC7" gate="A" pin="SER"/>
 <wire x1="60.96" y1="104.14" x2="63.5" y2="104.14" width="0.1524" layer="91"/>
 <label x="58.42" y="104.14" size="1.778" layer="95"/>
-</segment>
-<segment>
-<pinref part="IC3" gate="P1" pin="SI"/>
-<wire x1="43.18" y1="139.7" x2="45.72" y2="139.7" width="0.1524" layer="91"/>
-<label x="45.72" y="139.7" size="1.778" layer="95"/>
 </segment>
 </net>
 <net name="N$27" class="0">
