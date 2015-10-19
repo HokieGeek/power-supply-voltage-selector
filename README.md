@@ -13,7 +13,10 @@ Trying to learn more electronics by building a circuit that lets me have differe
 ## LEDs, buttons, and outputs
 ![Board of LEDs and Buttons](https://raw.githubusercontent.com/HokieGeek/power-supply-voltage-selector/master/schematics/leds-and-buttons.brd.png)
 
-# Datasheets
+# Current progress
+![Current progress](http://i.imgur.com/MxiJSQX.jpg)
+
+# Parts list
 * [LM7805CT](http://www.mouser.com/ds/2/149/LM7805-189995.pdf) - 5v voltage regulator for Vic
 * [LM7812C](https://www.fairchildsemi.com/datasheets/LM/LM7812.pdf) - 12v voltage regulator for Vcc from wall
 * [ATTINY85](http://www.atmel.com/images/atmel-2586-avr-8-bit-microcontroller-attiny25-attiny45-attiny85_datasheet.pdf) - Drives the digi pot and shift register
