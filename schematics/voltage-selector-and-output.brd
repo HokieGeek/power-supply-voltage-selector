@@ -862,7 +862,7 @@ design rules under a new name.</description>
 <attribute name="VALUE" x="3.175" y="31.496" size="0.8128" layer="27" ratio="12"/>
 </element>
 <element name="D6" library="SparkFun-LED" package="LED3MM-NS" value="" x="12.7" y="26.67"/>
-<element name="IC1" library="v-reg" package="78XXS" value="3.3V" x="48.26" y="12.7"/>
+<element name="IC1" library="v-reg" package="78XXS" value="5V" x="39.37" y="12.7"/>
 <element name="IC2" library="bbsup" package="TO220-5" value="MIC2941" x="36.83" y="40.64"/>
 <element name="IC3" library="microchip-custom" package="DIL8" value="MCP41010P" x="22.86" y="6.35">
 <attribute name="MF" value="MICROCHIP" x="22.86" y="6.35" size="1.778" layer="27" display="off"/>
@@ -905,7 +905,7 @@ design rules under a new name.</description>
 <contactref element="IC3" pad="8"/>
 <contactref element="C7" pad="1"/>
 <contactref element="C6" pad="1"/>
-<wire x1="34.29" y1="2.54" x2="50.8" y2="10.16" width="0" layer="19" extent="1-1"/>
+<wire x1="34.29" y1="2.54" x2="41.91" y2="10.16" width="0" layer="19" extent="1-1"/>
 <wire x1="29.21" y1="7.62" x2="34.29" y2="2.54" width="0" layer="19" extent="1-1"/>
 <wire x1="26.67" y1="10.16" x2="29.21" y2="7.62" width="0" layer="19" extent="1-1"/>
 <wire x1="19.05" y1="10.16" x2="26.67" y2="10.16" width="0" layer="19" extent="1-1"/>
@@ -978,8 +978,8 @@ design rules under a new name.</description>
 <wire x1="7.62" y1="13.97" x2="6.35" y2="19.05" width="0" layer="19" extent="1-1"/>
 <wire x1="3.81" y1="12.7" x2="7.62" y2="13.97" width="0" layer="19" extent="1-1"/>
 <wire x1="2.54" y1="3.81" x2="3.81" y2="12.7" width="0" layer="19" extent="1-1"/>
-<wire x1="48.26" y1="10.16" x2="53.34" y2="24.13" width="0" layer="19" extent="1-1"/>
-<wire x1="52.07" y1="2.54" x2="48.26" y2="10.16" width="0" layer="19" extent="1-1"/>
+<wire x1="39.37" y1="10.16" x2="53.34" y2="24.13" width="0" layer="19" extent="1-1"/>
+<wire x1="52.07" y1="2.54" x2="39.37" y2="10.16" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="PB5">
 <contactref element="ISP" pad="1"/>
@@ -1043,7 +1043,7 @@ design rules under a new name.</description>
 <wire x1="19.05" y1="29.21" x2="24.13" y2="33.02" width="0" layer="19" extent="1-1"/>
 <wire x1="11.43" y1="26.67" x2="19.05" y2="29.21" width="0" layer="19" extent="1-1"/>
 <wire x1="25.4" y1="22.86" x2="19.05" y2="29.21" width="0" layer="19" extent="1-1"/>
-<wire x1="45.72" y1="10.16" x2="25.4" y2="22.86" width="0" layer="19" extent="1-1"/>
+<wire x1="36.83" y1="10.16" x2="25.4" y2="22.86" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="N$2">
 <contactref element="D1" pad="A"/>
