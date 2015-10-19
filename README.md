@@ -9,6 +9,7 @@ Trying to learn more electronics by building a circuit that lets me have differe
 
 ## Boards
 ## Selection Logic
+![Main board](https://raw.githubusercontent.com/HokieGeek/power-supply-voltage-selector/master/schematics/voltage-selector-and-output.brd.png)
 TODO
 ## LEDs, buttons, et. al.
 ![Board of LEDs and Buttons](https://raw.githubusercontent.com/HokieGeek/power-supply-voltage-selector/master/schematics/leds-and-buttons.brd.png)
