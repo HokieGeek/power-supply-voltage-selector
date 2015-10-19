@@ -181,6 +181,9 @@ void voltageSelectionsInit(int numVoltages) {
 }
 
 void setVoltageSelection(int selection) {
+    // Set the LEDs
+    ShiftBytes(shiftReg, voltageSelections[selection].led);
+
     // Adjust the pot
     uint8_t potDataByte = voltageSelections[selection].potData;
     if (potDataByte == 0) {
@@ -190,9 +193,6 @@ void setVoltageSelection(int selection) {
     }
     /*
     */
-
-    // Set the LEDs
-    ShiftBytes(shiftReg, voltageSelections[selection].led);
 
     // Store in memory
     currentVoltageSelection = selection;
