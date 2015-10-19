@@ -351,7 +351,7 @@ UsedLibrary="/home/andres/Dropbox/ee/schematics/eagle/lbr/microchip-custom.lbr"
 
 [Win_1]
 Type="Schematic Editor"
-Loc="0 0 799 885"
+Loc="0 14 799 899"
 State=2
 Number=1
 File="voltage-selector-and-output.sch"
