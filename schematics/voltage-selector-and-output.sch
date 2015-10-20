@@ -13510,7 +13510,7 @@ For boards designed to be plugged directly into a USB slot. If possible, ensure 
 <part name="STANDOFF1" library="SparkFun-Electromechanical" deviceset="STAND-OFF" device=""/>
 <part name="STANDOFF2" library="SparkFun-Electromechanical" deviceset="STAND-OFF" device=""/>
 <part name="JP1" library="SparkFun-Connectors" deviceset="USB" device="-A-H"/>
-<part name="R2" library="rcl-ez" deviceset="R-US_" device="0207/5V" value="470"/>
+<part name="R2" library="rcl-ez" deviceset="R-US_" device="0207/5V" value="1k"/>
 </parts>
 <sheets>
 <sheet>
@@ -13547,10 +13547,10 @@ For boards designed to be plugged directly into a USB slot. If possible, ensure 
 <instance part="D1" gate="1" x="15.24" y="228.6"/>
 <instance part="TOGGLE" gate="G$1" x="40.64" y="228.6" rot="R270"/>
 <instance part="D2" gate="1" x="15.24" y="223.52"/>
-<instance part="GND" gate="VR1" x="81.28" y="208.28"/>
-<instance part="C1" gate="G$1" x="81.28" y="226.06" smashed="yes">
-<attribute name="NAME" x="82.296" y="226.695" size="1.778" layer="95"/>
-<attribute name="VALUE" x="77.216" y="229.489" size="1.778" layer="96"/>
+<instance part="GND" gate="VR1" x="68.58" y="208.28"/>
+<instance part="C1" gate="G$1" x="68.58" y="226.06" smashed="yes">
+<attribute name="NAME" x="69.596" y="226.695" size="1.778" layer="95"/>
+<attribute name="VALUE" x="64.516" y="229.489" size="1.778" layer="96"/>
 </instance>
 <instance part="IC5" gate="1" x="55.88" y="228.6"/>
 <instance part="D3" gate="1" x="12.7" y="215.9" rot="R180"/>
@@ -13560,8 +13560,8 @@ For boards designed to be plugged directly into a USB slot. If possible, ensure 
 <attribute name="VALUE" x="26.416" y="224.409" size="1.778" layer="96"/>
 </instance>
 <instance part="XFRM" gate="G$1" x="-7.62" y="218.44"/>
-<instance part="D6" gate="G$1" x="68.58" y="226.06"/>
-<instance part="C5" gate="G$1" x="88.9" y="223.52"/>
+<instance part="D6" gate="G$1" x="86.36" y="215.9"/>
+<instance part="C5" gate="G$1" x="76.2" y="223.52"/>
 <instance part="JACK" gate="G$1" x="109.22" y="160.02" rot="R180"/>
 <instance part="Q1" gate="G$1" x="78.74" y="137.16" rot="MR180"/>
 <instance part="C6" gate="G$1" x="-38.1" y="177.8"/>
@@ -13569,7 +13569,7 @@ For boards designed to be plugged directly into a USB slot. If possible, ensure 
 <instance part="STANDOFF1" gate="G$1" x="111.76" y="218.44"/>
 <instance part="STANDOFF2" gate="G$1" x="111.76" y="213.36"/>
 <instance part="JP1" gate="G$1" x="106.68" y="170.18"/>
-<instance part="R2" gate="G$1" x="68.58" y="215.9" rot="MR270"/>
+<instance part="R2" gate="G$1" x="86.36" y="223.52" rot="MR270"/>
 </instances>
 <busses>
 </busses>
@@ -13708,6 +13708,10 @@ For boards designed to be plugged directly into a USB slot. If possible, ensure 
 </segment>
 <segment>
 <pinref part="GND" gate="VR1" pin="AGND"/>
+<pinref part="C1" gate="G$1" pin="-"/>
+<pinref part="C5" gate="G$1" pin="2"/>
+<wire x1="76.2" y1="220.98" x2="68.58" y2="220.98" width="0.1524" layer="91"/>
+<wire x1="68.58" y1="220.98" x2="68.58" y2="210.82" width="0.1524" layer="91"/>
 <wire x1="30.48" y1="210.82" x2="30.48" y2="215.9" width="0.1524" layer="91"/>
 <pinref part="D4" gate="1" pin="A"/>
 <wire x1="17.78" y1="210.82" x2="22.86" y2="210.82" width="0.1524" layer="91"/>
@@ -13719,18 +13723,9 @@ For boards designed to be plugged directly into a USB slot. If possible, ensure 
 <pinref part="C4" gate="G$1" pin="-"/>
 <wire x1="30.48" y1="210.82" x2="55.88" y2="210.82" width="0.1524" layer="91"/>
 <junction x="30.48" y="210.82"/>
-<pinref part="C1" gate="G$1" pin="-"/>
-<wire x1="55.88" y1="210.82" x2="68.58" y2="210.82" width="0.1524" layer="91"/>
-<wire x1="68.58" y1="210.82" x2="81.28" y2="210.82" width="0.1524" layer="91"/>
-<wire x1="81.28" y1="220.98" x2="81.28" y2="210.82" width="0.1524" layer="91"/>
-<junction x="81.28" y="210.82"/>
 <pinref part="IC5" gate="1" pin="GND"/>
 <wire x1="55.88" y1="220.98" x2="55.88" y2="210.82" width="0.1524" layer="91"/>
-<junction x="55.88" y="210.82"/>
-<pinref part="C5" gate="G$1" pin="2"/>
-<wire x1="88.9" y1="220.98" x2="81.28" y2="220.98" width="0.1524" layer="91"/>
-<pinref part="R2" gate="G$1" pin="2"/>
-<junction x="68.58" y="210.82"/>
+<wire x1="55.88" y1="210.82" x2="68.58" y2="210.82" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="PB5" class="0">
@@ -13845,20 +13840,10 @@ For boards designed to be plugged directly into a USB slot. If possible, ensure 
 <segment>
 <pinref part="IC2" gate="G$1" pin="IN"/>
 <pinref part="IC1" gate="1" pin="IN"/>
-<pinref part="C1" gate="G$1" pin="+"/>
-<pinref part="IC5" gate="1" pin="OUT"/>
 <wire x1="38.1" y1="195.58" x2="38.1" y2="172.72" width="0.1524" layer="91"/>
-<wire x1="99.06" y1="228.6" x2="88.9" y2="228.6" width="0.1524" layer="91"/>
-<junction x="81.28" y="228.6"/>
-<wire x1="88.9" y1="228.6" x2="81.28" y2="228.6" width="0.1524" layer="91"/>
-<wire x1="63.5" y1="228.6" x2="68.58" y2="228.6" width="0.1524" layer="91"/>
-<wire x1="68.58" y1="228.6" x2="81.28" y2="228.6" width="0.1524" layer="91"/>
-<pinref part="D6" gate="G$1" pin="A"/>
-<junction x="68.58" y="228.6"/>
-<pinref part="C5" gate="G$1" pin="1"/>
-<junction x="88.9" y="228.6"/>
-<wire x1="99.06" y1="228.6" x2="99.06" y2="195.58" width="0.1524" layer="91"/>
-<wire x1="99.06" y1="195.58" x2="38.1" y2="195.58" width="0.1524" layer="91"/>
+<wire x1="86.36" y1="210.82" x2="86.36" y2="195.58" width="0.1524" layer="91"/>
+<wire x1="86.36" y1="195.58" x2="38.1" y2="195.58" width="0.1524" layer="91"/>
+<pinref part="D6" gate="G$1" pin="C"/>
 </segment>
 </net>
 <net name="N$2" class="0">
@@ -13931,8 +13916,20 @@ For boards designed to be plugged directly into a USB slot. If possible, ensure 
 </net>
 <net name="N$5" class="0">
 <segment>
-<pinref part="D6" gate="G$1" pin="C"/>
+<pinref part="IC5" gate="1" pin="OUT"/>
+<pinref part="C1" gate="G$1" pin="+"/>
 <pinref part="R2" gate="G$1" pin="1"/>
+<wire x1="86.36" y1="228.6" x2="76.2" y2="228.6" width="0.1524" layer="91"/>
+<pinref part="C5" gate="G$1" pin="1"/>
+<junction x="76.2" y="228.6"/>
+<wire x1="76.2" y1="228.6" x2="68.58" y2="228.6" width="0.1524" layer="91"/>
+<wire x1="68.58" y1="228.6" x2="63.5" y2="228.6" width="0.1524" layer="91"/>
+</segment>
+</net>
+<net name="N$10" class="0">
+<segment>
+<pinref part="R2" gate="G$1" pin="2"/>
+<pinref part="D6" gate="G$1" pin="A"/>
 </segment>
 </net>
 </nets>
