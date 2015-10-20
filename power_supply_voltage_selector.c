@@ -28,13 +28,13 @@
 #define BUTTON_PIN PB0
 
 #define SREG_PIN_DATA PB1
-#define SREG_PIN_LATCHCLOCK PB2
-#define SREG_PIN_SHIFTCLOCK PB3
-#define SREG_PIN_RESET PB4
+#define SREG_PIN_LATCHCLOCK PB3
+#define SREG_PIN_SHIFTCLOCK PB2
+#define SREG_PIN_RESET -1
 
 #define DIGIPOT_PIN_DATA PB1
 #define DIGIPOT_PIN_SERIALCLOCK PB2
-#define DIGIPOT_PIN_CHIPSELECT PB3
+#define DIGIPOT_PIN_CHIPSELECT PB4
 #define MCP41010_COMMAND_BYTE 0b00010001
 
 #define OPTIONS_RANGE_START 0b01000000
@@ -180,12 +180,14 @@ void MCP41010_write(SpiDevice *const dev, uint8_t value) {
 }
 
 void init_pins() {
+    /*
     shiftReg = InitShiftRegister(SREG_PIN_DATA, SREG_PIN_LATCHCLOCK,
                                  SREG_PIN_SHIFTCLOCK, SREG_PIN_RESET);
+                                 */
 
-    spi = Init3WireSpiDevice(DIGIPOT_PIN_CHIPSELECT,
-                             DIGIPOT_PIN_SERIALCLOCK,
-                             DIGIPOT_PIN_DATA);
+    spi = InitSoftwareSpi(DIGIPOT_PIN_CHIPSELECT,
+                          DIGIPOT_PIN_SERIALCLOCK,
+                          DIGIPOT_PIN_DATA);
 
     // DDRB |= (1 << BUTTON_PIN); // pull-up resistor
 
