@@ -255,8 +255,8 @@ void init_pins() {
     spi = InitSoftwareSpi(MCP41010_PIN_CHIPSELECT,
                           MCP41010_PIN_SERIALCLOCK,
                           MCP41010_PIN_DATA);
-    // TODO: spi = InitSpiMaster(DIGIPOT_PIN_CHIPSELECT);
 
+    // TODO: spi = InitSpiMaster(MCP41010_PIN_CHIPSELECT);
 }
 
 void init_interrupts() {
