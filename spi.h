@@ -18,7 +18,7 @@ void SetChipSelectHigh(SpiDevice *const dev);
 void SetChipSelectLow(SpiDevice *const dev);
 void ToggleSerialClock(SpiDevice *const dev);
 void SpiWriteBytes(SpiDevice *const dev, int numBytes, uint8_t data[]);
-SpiDevice *const Init3WireSpiDevice(int chipSelect, int serialClock, int serialDataInput);
+SpiDevice *const InitSoftwareSpi(int chipSelect, int serialClock, int serialDataInput);
 
 /*
 typedef struct {
