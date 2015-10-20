@@ -177,6 +177,9 @@ void MCP41010_write(SpiDevice *const dev, uint8_t value) {
     input[1] = value;
 
     SpiWriteBytes(dev, 2, input);
+    
+    // union { uint16_t bytes; { uint8_t msb, uint8_t lsb }};
+    // SpiSend16(dev, MCP41010_COMMAND_BYTE, value);
 }
 
 void init_pins() {
