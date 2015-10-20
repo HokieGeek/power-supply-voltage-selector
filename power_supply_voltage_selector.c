@@ -205,7 +205,6 @@ void init_interrupts() {
 }
 
 /*
-*/
 int main(void) {
     // 1. Read EEPROM for previous setting, set respective pins to high
     // 2. Go to sleep and wait for a button to be pushed
@@ -232,8 +231,8 @@ int main(void) {
         sleep_mode();   // go to sleep and wait for interrupt...
     }
 }
+*/
 
-/*
 int main(void) {
     init_pins();
 
@@ -250,4 +249,3 @@ int main(void) {
         }
     }
 }
-*/
