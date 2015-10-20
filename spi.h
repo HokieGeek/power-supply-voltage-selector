@@ -15,6 +15,10 @@ void ToggleSerialClock(SpiDevice *const dev);
 void SpiWriteBytes(SpiDevice *const dev, int numBytes, uint8_t data[]);
 SpiDevice *const InitSoftwareSpi(int chipSelect, int serialClock, int serialDataInput);
 
+#define USI_DO_PIN DDB1
+#define USI_DI_PIN DDB0
+#define USI_SCK_PIN DDB2
+
 SpiDevice *const InitSpiMaster(int chipSelect);
 uint8_t SpiSend(SpiDevice *const dev, uint8_t data);
 uint8_t SpiSend16(SpiDevice *const dev, uint8_t byte1, uint8_t byte2);
