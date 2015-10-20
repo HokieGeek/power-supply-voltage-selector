@@ -32,9 +32,9 @@
 #define SREG_PIN_SHIFTCLOCK PB2
 #define SREG_PIN_RESET -1
 
-#define DIGIPOT_PIN_DATA PB5
+#define DIGIPOT_PIN_DATA PB1
 #define DIGIPOT_PIN_SERIALCLOCK PB2
-#define DIGIPOT_PIN_CHIPSELECT PB3
+#define DIGIPOT_PIN_CHIPSELECT PB5
 #define MCP41010_WRITE_COMMAND_BYTE 0b00010001
 #define MCP41010_SHUTDOWN_COMMAND_BYTE 0b00100001
 
@@ -181,9 +181,6 @@ void voltageSelectionsInit(int numVoltages) {
 }
 
 void setVoltageSelection(int selection) {
-    // Set the LEDs
-    ShiftBytes(shiftReg, voltageSelections[selection].led);
-
     // Adjust the pot
     uint8_t potDataByte = voltageSelections[selection].potData;
     if (potDataByte == 0) {
@@ -191,8 +188,9 @@ void setVoltageSelection(int selection) {
     } else {
         MCP41010_write(spi, potDataByte);
     }
-    /*
-    */
+
+    // Set the LEDs
+    ShiftBytes(shiftReg, voltageSelections[selection].led);
 
     // Store in memory
     currentVoltageSelection = selection;
