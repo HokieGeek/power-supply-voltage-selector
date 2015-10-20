@@ -3,11 +3,6 @@
 
 #include <stdint.h>
 
-// typedef enum {
-//     3WIRE,
-//     5WIRE
-// } SpiDeviceTypeEnum;
-
 typedef struct {
     int chipSelect;
     int serialClock;
@@ -20,18 +15,9 @@ void ToggleSerialClock(SpiDevice *const dev);
 void SpiWriteBytes(SpiDevice *const dev, int numBytes, uint8_t data[]);
 SpiDevice *const InitSoftwareSpi(int chipSelect, int serialClock, int serialDataInput);
 
-/*
-typedef struct {
-    int chipSelect;
-    // TODO: is master
-} SpiDevice2;
-
-void SetChipSelectHigh2(SpiDevice2 *const dev);
-void SetChipSelectLow2(SpiDevice2 *const dev);
-
-SpiDevice2 *const InitSpiMaster(int chipSelect);
-uint8_t SpiSend(SpiDevice2 *const dev, uint8_t data);
-uint8_t SpiSend16(SpiDevice2 *const dev, uint8_t byte1, uint8_t byte2);
-*/
+SpiDevice *const InitSpiMaster(int chipSelect);
+uint8_t SpiSend(SpiDevice *const dev, uint8_t data);
+uint8_t SpiSend16(SpiDevice *const dev, uint8_t byte1, uint8_t byte2);
+// uint16_t SpiSend16(SpiDevice *const dev, uint16_t bytes);
 
 #endif //__SPI_H__
