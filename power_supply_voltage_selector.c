@@ -188,6 +188,7 @@ void init_pins() {
     spi = InitSoftwareSpi(DIGIPOT_PIN_CHIPSELECT,
                           DIGIPOT_PIN_SERIALCLOCK,
                           DIGIPOT_PIN_DATA);
+    // TODO: spi = InitSpiMaster(DIGIPOT_PIN_CHIPSELECT);
 
     // DDRB |= (1 << BUTTON_PIN); // pull-up resistor
 
