@@ -61,7 +61,9 @@ SpiDevice *const InitSpiMaster(int chipSelect) {
     USICR |= (1<<USIWM0)|(1<<USICS1)|(1<<USICLK);
 
     // Set SCK and MOSI as output
-    DDRB |= (1<<PB2)|(1<<PB0)|(1<<chipSelect);
+    // DDRB |= (1<<PB2)|(1<<PB0)|(1<<chipSelect);
+    DDRB |= (1<<USI_SCK_PIN)|(1<<USI_DO_PIN)|(1<<dev->chipSelect);
+    DDRB &= ~(1<<USI_DI_PIN);
 
     SetChipSelectHigh(dev);
 
