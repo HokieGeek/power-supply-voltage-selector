@@ -152,7 +152,7 @@ ISR(WDT_vect) {
 }
 
 ISR (PCINT0_vect) {
-    // PCINT****0**** denotes that PB0 was pressed
+    // FIXME: how on earth can I tell which button was pressed?
     BUTTON_ITEM* btn = debouncedButton(BUTTON_PIN);
     btn->handler(btn->pinId, btn->state, btn->clickCount);
 }
