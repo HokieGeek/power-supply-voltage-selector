@@ -228,6 +228,9 @@ void MCP4XXXX_send(SpiDevice *const dev, uint8_t command, uint8_t data) {
     input[1] = data;
 
     SpiWriteBytes(dev, 2, input);
+    
+    // union { uint16_t bytes; { uint8_t msb, uint8_t lsb }};
+    // SpiSend16(dev, MCP41010_COMMAND_BYTE, value);
 }
 
 void MCP41XXX_shutdown(SpiDevice *const dev) {
