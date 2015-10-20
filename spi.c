@@ -34,7 +34,7 @@ void SpiWriteBytes(SpiDevice *const dev, int numBytes, uint8_t data[]) {
     SetChipSelectHigh(dev);
 }
 
-SpiDevice *const Init3WireSpiDevice(int chipSelect, int serialClock, int serialDataInput) {
+SpiDevice *const InitSoftwareSpi(int chipSelect, int serialClock, int serialDataInput) {
     const int sdsize = sizeof(SpiDevice);
 
     SpiDevice *const dev = (SpiDevice*)malloc(sdsize);
