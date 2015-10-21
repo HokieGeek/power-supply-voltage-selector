@@ -164,19 +164,19 @@ void voltageSelectionsInit(int numVoltages) {
 
     // Initialize the selections
     //// 3.3v
-    voltageSelections[0].led = 0b01000000;
+    voltageSelections[0].led = 0b00000010;
     voltageSelections[0].potData = 43;
     //// 5v
-    voltageSelections[1].led = 0b00100000;
+    voltageSelections[1].led = 0b00000100;
     voltageSelections[1].potData = 76;
     //// 9v
-    voltageSelections[2].led = 0b00010000;
+    voltageSelections[2].led = 0b00001000;
     voltageSelections[2].potData = 161;
     //// 12v
-    voltageSelections[3].led = 0b00001000;
+    voltageSelections[3].led = 0b00010000;
     voltageSelections[3].potData = 224;
     //// Adj
-    voltageSelections[4].led = 0b00000100;
+    voltageSelections[4].led = 0b00100000;
     voltageSelections[4].potData = 0;
 }
 
