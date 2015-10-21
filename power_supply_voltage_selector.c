@@ -27,16 +27,19 @@
 #define BTN_DOUBLE_CLICK_DELAY_MILLIS 200
 #define BUTTON_PIN PB0
 
-#define SREG_PIN_DATA PB1
-#define SREG_PIN_LATCHCLOCK PB3
-#define SREG_PIN_SHIFTCLOCK PB2
-#define SREG_PIN_RESET PB4
+#define HC595_PIN_DATA PB1
+#define HC595_PIN_LATCHCLOCK PB3
+#define HC595_PIN_SHIFTCLOCK PB2
+#define HC595_PIN_RESET PB4
 
-#define DIGIPOT_PIN_DATA PB1
-#define DIGIPOT_PIN_SERIALCLOCK PB2
-#define DIGIPOT_PIN_CHIPSELECT PB4
-#define MCP41010_WRITE_COMMAND_BYTE 0b00010001
-#define MCP41010_SHUTDOWN_COMMAND_BYTE 0b00100001
+#define MCP41010_PIN_DATA PB1
+#define MCP41010_PIN_SERIALCLOCK PB2
+#define MCP41010_PIN_CHIPSELECT PB4
+
+#define MCP4XXXX_POT_0 0
+#define MCP4XXXX_POT_1 1
+#define MCP4XXXX_COMMAND_P0_WRITE 0b00010001
+#define MCP4XXXX_COMMAND_P0_SHUTDOWN 0b00100001
 
 #define NUM_VOLTAGE_SELECTIONS 5
 #define SELECTED_VOLTAGE_EEPROM_ADDRESS 0b01000000
@@ -184,9 +187,9 @@ void setVoltageSelection(int selection) {
     // Adjust the pot
     uint8_t potDataByte = voltageSelections[selection].potData;
     if (potDataByte == 0) {
-        MCP41010_shutdown(spi);
+        MCP41XXX_shutdown(spi);
     } else {
-        MCP41010_write(spi, potDataByte);
+        MCP41XXX_write(spi, potDataByte);
     }
 
     // Set the LEDs
@@ -215,29 +218,37 @@ void buttonHandler(int btnId, int state, int clickCount) {
     }
 }
 
-void MCP41010_shutdown(SpiDevice *const dev) {
+void MCP4XXX_send(SpiDevice *const dev, uint8_t command, uint8_t data) {
     uint8_t input[2];
-    input[0] = MCP41010_SHUTDOWN_COMMAND_BYTE;
-    input[1] = 0b00000000;
-
+    input[0] = command;
+    input[1] = data;
+    
     SpiWriteBytes(dev, 2, input);
 }
 
-void MCP41010_write(SpiDevice *const dev, uint8_t value) {
-    uint8_t input[2];
-    input[0] = MCP41010_WRITE_COMMAND_BYTE;
-    input[1] = value;
+void MCP41XXX_shutdown(SpiDevice *const dev) {
+    MCP4XXXX_send(dev, MCP4XXXX_COMMAND_P0_SHUTDOWN, 0b00000000);
+}
 
-    SpiWriteBytes(dev, 2, input);
+void MCP41010_shutdown(dev) {
+    MCP41XXX_shutdown(dev);
+}
+
+void MCP41XXX_write(SpiDevice *const dev, uint8_t value) {
+    MCP4XXXX_send(dev, MCP4XXXX_COMMAND_P0_WRITE, value);
+}
+
+void MCP41010_write(dev, value) {
+    MCP41XXX_write(dev, value);
 }
 
 void init_pins() {
-    shiftReg = InitShiftRegister(SREG_PIN_DATA, SREG_PIN_LATCHCLOCK,
-                                 SREG_PIN_SHIFTCLOCK, SREG_PIN_RESET);
+    shiftReg = InitShiftRegister(HC595_PIN_DATA, HC595_PIN_LATCHCLOCK,
+                                 HC595_PIN_SHIFTCLOCK, HC595_PIN_RESET);
 
-    spi = Init3WireSpiDevice(DIGIPOT_PIN_CHIPSELECT,
-                             DIGIPOT_PIN_SERIALCLOCK,
-                             DIGIPOT_PIN_DATA);
+    spi = Init3WireSpiDevice(MCP41010_PIN_CHIPSELECT,
+                             MCP41010_PIN_SERIALCLOCK,
+                             MCP41010_PIN_DATA);
 
 }
 
