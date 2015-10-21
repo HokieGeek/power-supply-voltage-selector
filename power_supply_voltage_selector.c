@@ -249,9 +249,9 @@ void init_pins() {
 
 void init_interrupts() {
     // Do the interrupts
-    PCMSK |= (1<<PCINT0); // Enable external interrupts PCINT0
-    MCUCR  = (1<<ISC00);
+    // MCUCR  = (1<<ISC00); // TODO This is only needed if using INT0, I believe
     GIMSK |= (1<<PCIE); // Pin Change Interrupt Enable
+    PCMSK |= (1<<PCINT0); // Turn on interrupt for Pin0
 
     // WDTCR |= TIMER_PRESCALE;
     // WDTCR |= (1<<WDIE); // Enable watchdog timer interrupts
