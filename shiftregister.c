@@ -38,18 +38,18 @@ void ShiftBytes(ShiftRegister *const reg, uint8_t data) {
 }
 
 ShiftRegister* const InitShiftRegister(int data, int latchClock, int shiftClock, int reset) {
-    // FIXME
     const int srsize = sizeof(ShiftRegister);
     ShiftRegister *const reg = (ShiftRegister*)malloc(srsize);
     reg->data = data;
     reg->latchClock = latchClock;
     reg->shiftClock = shiftClock;
-    reg->reset = reset;
 
-    DDRB |= ((1<<reg->data)|(1<<reg->latchClock)|(1<<reg->shiftClock)|(1<<reg->reset));
+    DDRB |= ((1<<reg->data)|(1<<reg->latchClock)|(1<<reg->shiftClock));
 
-    ResetShiftRegister(reg);
+    if (reset >= 0) {
+        reg->reset = reset;
+        DDRB |= (1<<reg->reset);
+    }
 
     return reg;
 }
-
