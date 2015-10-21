@@ -30,7 +30,6 @@
 #define HC595_PIN_DATA PB1
 #define HC595_PIN_LATCHCLOCK PB3
 #define HC595_PIN_SHIFTCLOCK PB2
-#define HC595_PIN_RESET PB4
 
 #define MCP41010_PIN_DATA PB1
 #define MCP41010_PIN_SERIALCLOCK PB2
@@ -246,8 +245,7 @@ void MCP41010_write(dev, value) {
 }
 
 void init_pins() {
-    shiftReg = InitShiftRegister(HC595_PIN_DATA, HC595_PIN_LATCHCLOCK,
-                                 HC595_PIN_SHIFTCLOCK, HC595_PIN_RESET);
+    shiftReg = InitShiftRegister(HC595_PIN_DATA, HC595_PIN_LATCHCLOCK, HC595_PIN_SHIFTCLOCK, -1);
 
     spi = InitSoftwareSpi(MCP41010_PIN_CHIPSELECT,
                           MCP41010_PIN_SERIALCLOCK,
