@@ -44,14 +44,11 @@ ShiftRegister* const InitShiftRegister(int data, int latchClock, int shiftClock,
     reg->data = data;
     reg->latchClock = latchClock;
     reg->shiftClock = shiftClock;
+    reg->reset = reset;
 
-    DDRB |= ((1<<reg->data)|(1<<reg->latchClock)|(1<<reg->shiftClock));
-    
-    // Reset is not required, so only enable a pin if one was passed in
-    if (reset >= 0) {
-        reg->reset = reset;
-        DDRB |= (1<<reg->reset);
-    }
+    DDRB |= ((1<<reg->data)|(1<<reg->latchClock)|(1<<reg->shiftClock)|(1<<reg->reset));
+
+    ResetShiftRegister(reg);
 
     return reg;
 }

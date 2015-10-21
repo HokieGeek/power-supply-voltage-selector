@@ -30,7 +30,7 @@
 #define SREG_PIN_DATA PB1
 #define SREG_PIN_LATCHCLOCK PB3
 #define SREG_PIN_SHIFTCLOCK PB2
-#define SREG_PIN_RESET -1
+#define SREG_PIN_RESET PB4
 
 #define DIGIPOT_PIN_DATA PB1
 #define DIGIPOT_PIN_SERIALCLOCK PB2
@@ -249,12 +249,8 @@ void init_pins() {
 
 void init_interrupts() {
     // Do the interrupts
-    // MCUCR  = (1<<ISC00); // TODO This is only needed if using INT0, I believe
     GIMSK |= (1<<PCIE); // Pin Change Interrupt Enable
     PCMSK |= (1<<PCINT0); // Turn on interrupt for Pin0
-
-    // WDTCR |= TIMER_PRESCALE;
-    // WDTCR |= (1<<WDIE); // Enable watchdog timer interrupts
 
     sei(); // Enable global interrupts 
 }
