@@ -19,6 +19,9 @@ SpiDevice *const InitSoftwareSpi(int chipSelect, int serialClock, int serialData
 #define USI_DI_PIN DDB0
 #define USI_SCK_PIN DDB2
 
+void InitUsi(int datamode);
+uint8_t UsiSend(uint8_t data);
+
 SpiDevice *const InitSpiMaster(int chipSelect);
 uint8_t SpiSend(SpiDevice *const dev, uint8_t data);
 uint8_t SpiSend16(SpiDevice *const dev, uint8_t byte1, uint8_t byte2);

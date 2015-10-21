@@ -5,8 +5,8 @@
 
 typedef struct {
     int data;
-    int latchClock;
     int shiftClock;
+    int latchClock;
     int reset;
 } ShiftRegister;
 

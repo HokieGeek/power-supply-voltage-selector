@@ -6,6 +6,8 @@
 #include <avr/interrupt.h>
 #include <util/delay.h>
 
+// #include "spi.h"
+
 void ToggleShiftClock(ShiftRegister *const reg) {
     PORTB |= (1<<reg->shiftClock);
     PORTB &= ~(1<<reg->shiftClock);
@@ -26,6 +28,7 @@ void ResetShiftRegister(ShiftRegister *const reg) {
 }
 
 void ShiftBytes(ShiftRegister *const reg, uint8_t data) {
+    /*
     for (uint8_t i = 0; i < 8; i++) {
         if ((data & (1 << i))) {
             PORTB |= (1 << reg->data);
@@ -34,6 +37,8 @@ void ShiftBytes(ShiftRegister *const reg, uint8_t data) {
         }
         ToggleShiftClock(reg);
     }
+    */
+    UsiSend(data);
     ToggleLatchClock(reg);
 }
 
@@ -42,13 +47,14 @@ ShiftRegister* const InitShiftRegister(int data, int latchClock, int shiftClock,
     const int srsize = sizeof(ShiftRegister);
     ShiftRegister *const reg = (ShiftRegister*)malloc(srsize);
     reg->data = data;
-    reg->latchClock = latchClock;
     reg->shiftClock = shiftClock;
+    reg->latchClock = latchClock;
     reg->reset = reset;
 
-    DDRB |= ((1<<reg->data)|(1<<reg->latchClock)|(1<<reg->shiftClock)|(1<<reg->reset));
+    // DDRB |= ((1<<reg->data)|(1<<reg->latchClock)|(1<<reg->shiftClock)|(1<<reg->reset));
+    DDRB |= ((1<<reg->latchClock)|(1<<reg->reset));
 
-    ResetShiftRegister(reg);
+    InitUsi(0);
 
     return reg;
 }

@@ -229,16 +229,14 @@ void MCP41010_write(SpiDevice *const dev, uint8_t value) {
     input[1] = value;
 
     SpiWriteBytes(dev, 2, input);
-    
+
     // union { uint16_t bytes; { uint8_t msb, uint8_t lsb }};
     // SpiSend16(dev, MCP41010_COMMAND_BYTE, value);
 }
 
 void init_pins() {
-    /*
     shiftReg = InitShiftRegister(SREG_PIN_DATA, SREG_PIN_LATCHCLOCK,
                                  SREG_PIN_SHIFTCLOCK, SREG_PIN_RESET);
-                                 */
 
     spi = InitSoftwareSpi(DIGIPOT_PIN_CHIPSELECT,
                           DIGIPOT_PIN_SERIALCLOCK,
@@ -270,7 +268,7 @@ void init() {
     setVoltageSelection(currentVoltageSelection);
 }
 
-/*
+#ifndef TESTSPI
 int main(void) {
     // 1. Read EEPROM for previous setting, set respective pins to high
     // 2. Go to sleep and wait for a button to be pushed
@@ -289,10 +287,11 @@ int main(void) {
         sleep_mode();   // go to sleep and wait for interrupt...
     }
 }
-*/
-
+#else
 int main(void) {
     init_pins();
+
+    SpiDevice *usi = InitSpiMaster(DIGIPOT_PIN_CHIPSELECT);
 
     while(1) {
         for (int level = 0; level < 255; level++) {
@@ -300,7 +299,10 @@ int main(void) {
             _delay_ms(10);
         }
         _delay_ms(1500);
-        MCP41010_shutdown(spi);
+
+        SpiSend(usi, 0b00100001);
+
+        // MCP41010_shutdown(spi);
         _delay_ms(1500);
 
         for (int level = 255; level > 0; level--) {
@@ -309,3 +311,4 @@ int main(void) {
         }
     }
 }
+#endif
