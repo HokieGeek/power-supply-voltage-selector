@@ -26,8 +26,8 @@ void ResetShiftRegister(ShiftRegister *const reg) {
 }
 
 void ShiftBytes(ShiftRegister *const reg, uint8_t data) {
-    for (uint8_t i = 0; i < 8; i++) {
-        if ((data & (1 << i))) {
+    for (uint8_t bit = 7; bit >= 0; --bit) {
+        if ((data & (1 << bit))) {
             PORTB |= (1 << reg->data);
         } else {
             PORTB &= ~(1 << reg->data);
