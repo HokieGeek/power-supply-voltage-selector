@@ -13737,11 +13737,6 @@ For boards designed to be plugged directly into a USB slot. If possible, ensure 
 <wire x1="-5.08" y1="152.4" x2="-5.08" y2="172.72" width="0.1524" layer="91"/>
 <label x="-5.08" y="172.72" size="1.778" layer="95"/>
 </segment>
-<segment>
-<pinref part="IC3" gate="P1" pin="/CS"/>
-<wire x1="43.18" y1="144.78" x2="45.72" y2="144.78" width="0.1524" layer="91"/>
-<label x="45.72" y="144.78" size="1.778" layer="95"/>
-</segment>
 </net>
 <net name="PB2" class="0">
 <segment>
@@ -13805,6 +13800,11 @@ For boards designed to be plugged directly into a USB slot. If possible, ensure 
 <pinref part="JP4" gate="G$1" pin="7"/>
 <wire x1="-20.32" y1="129.54" x2="-22.86" y2="129.54" width="0.1524" layer="91"/>
 <label x="-25.4" y="129.54" size="1.778" layer="95"/>
+</segment>
+<segment>
+<pinref part="IC3" gate="P1" pin="/CS"/>
+<wire x1="43.18" y1="144.78" x2="45.72" y2="144.78" width="0.1524" layer="91"/>
+<label x="45.72" y="144.78" size="1.778" layer="95"/>
 </segment>
 </net>
 <net name="PB0" class="0">

@@ -5466,6 +5466,11 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 <wire x1="73.66" y1="38.1" x2="76.2" y2="38.1" width="0.1524" layer="91"/>
 <label x="73.66" y="38.1" size="1.778" layer="95"/>
 </segment>
+<segment>
+<pinref part="IC1" gate="A" pin="SCL"/>
+<wire x1="40.64" y1="53.34" x2="40.64" y2="55.88" width="0.1524" layer="91"/>
+<label x="40.64" y="53.34" size="1.778" layer="95" rot="R90"/>
+</segment>
 </net>
 <net name="GND" class="0">
 <segment>
@@ -5537,22 +5542,17 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </net>
 <net name="PB3" class="0">
 <segment>
-<pinref part="IC1" gate="A" pin="SCK"/>
-<wire x1="43.18" y1="53.34" x2="43.18" y2="55.88" width="0.1524" layer="91"/>
-<label x="43.18" y="53.34" size="1.778" layer="95" rot="R90"/>
-</segment>
-<segment>
 <pinref part="JP3" gate="G$1" pin="6"/>
 <wire x1="38.1" y1="71.12" x2="38.1" y2="68.58" width="0.1524" layer="91"/>
 <label x="38.1" y="66.04" size="1.778" layer="95" rot="R90"/>
 </segment>
+<segment>
+<pinref part="IC1" gate="A" pin="RCK"/>
+<wire x1="35.56" y1="53.34" x2="35.56" y2="55.88" width="0.1524" layer="91"/>
+<label x="35.56" y="53.34" size="1.778" layer="95" rot="R90"/>
+</segment>
 </net>
 <net name="PB4" class="0">
-<segment>
-<pinref part="IC1" gate="A" pin="SCL"/>
-<wire x1="40.64" y1="53.34" x2="40.64" y2="55.88" width="0.1524" layer="91"/>
-<label x="40.64" y="53.34" size="1.778" layer="95" rot="R90"/>
-</segment>
 <segment>
 <pinref part="JP3" gate="G$1" pin="7"/>
 <wire x1="40.64" y1="71.12" x2="40.64" y2="68.58" width="0.1524" layer="91"/>
@@ -5561,14 +5561,14 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </net>
 <net name="PB2" class="0">
 <segment>
-<pinref part="IC1" gate="A" pin="RCK"/>
-<wire x1="35.56" y1="53.34" x2="35.56" y2="55.88" width="0.1524" layer="91"/>
-<label x="35.56" y="53.34" size="1.778" layer="95" rot="R90"/>
-</segment>
-<segment>
 <pinref part="JP3" gate="G$1" pin="5"/>
 <wire x1="35.56" y1="71.12" x2="35.56" y2="68.58" width="0.1524" layer="91"/>
 <label x="35.56" y="66.04" size="1.778" layer="95" rot="R90"/>
+</segment>
+<segment>
+<pinref part="IC1" gate="A" pin="SCK"/>
+<wire x1="43.18" y1="53.34" x2="43.18" y2="55.88" width="0.1524" layer="91"/>
+<label x="43.18" y="53.34" size="1.778" layer="95" rot="R90"/>
 </segment>
 </net>
 <net name="VCC" class="0">
