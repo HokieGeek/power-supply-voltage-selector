@@ -6,6 +6,7 @@
 #include <avr/interrupt.h>
 #include <util/delay.h>
 
+
 void SetChipSelectHigh(SpiDevice *const dev) {
     PORTB |= (1<<dev->chipSelect);
 }
@@ -49,18 +50,24 @@ SpiDevice *const InitSoftwareSpi(int chipSelect, int serialClock, int serialData
     return dev;
 }
 
+int IsUsiInitialized = 0;
+
 // While this is pretty great, the attiny85's registers are 8-bit so 
 // I can't use it to set the MCP41010's 16-bit registers. Still need to do bit-banging.
 void InitUsi(int datamode) {
-    USICR &= ~((1<<USISIE)|(1<<USIOIE)|(1<<USIWM1));
-    USICR |= (1<<USIWM0)|(1<<USICS1)|(1<<USICLK);
+    if (IsUsiInitialized == 0) {
+        USICR &= ~((1<<USISIE)|(1<<USIOIE)|(1<<USIWM1));
+        USICR |= (1<<USIWM0)|(1<<USICS1)|(1<<USICLK);
 
-    USICR |= (1<<USICS0);
+        // USICR |= (1<<USICS0);
 
-    // Set SCK and MOSI as output
-    // DDRB |= (1<<PB2)|(1<<PB0)|(1<<chipSelect);
-    DDRB |= (1<<USI_SCK_PIN)|(1<<USI_DO_PIN);
-    DDRB &= ~(1<<USI_DI_PIN);
+        // Set SCK and MOSI as output
+        // DDRB |= (1<<PB2)|(1<<PB0)|(1<<chipSelect);
+        DDRB |= (1<<USI_SCK_PIN)|(1<<USI_DO_PIN);
+        DDRB &= ~(1<<USI_DI_PIN);
+
+        IsUsiInitialized = 1;
+    }
 }
 
 uint8_t UsiSend(uint8_t data) {
@@ -78,6 +85,7 @@ SpiDevice *const InitSpiMaster(int chipSelect) {
     SpiDevice *const dev = (SpiDevice*)malloc(sdsize);
     dev->chipSelect = chipSelect;
 
+    /*
     USICR &= ~((1<<USISIE)|(1<<USIOIE)|(1<<USIWM1));
     USICR |= (1<<USIWM0)|(1<<USICS1)|(1<<USICLK);
 
@@ -85,6 +93,11 @@ SpiDevice *const InitSpiMaster(int chipSelect) {
     // DDRB |= (1<<PB2)|(1<<PB0)|(1<<chipSelect);
     DDRB |= (1<<USI_SCK_PIN)|(1<<USI_DO_PIN)|(1<<dev->chipSelect);
     DDRB &= ~(1<<USI_DI_PIN);
+    */
+
+    InitUsi(0);
+
+    DDRB |= (1<<dev->chipSelect);
 
     SetChipSelectHigh(dev);
 
