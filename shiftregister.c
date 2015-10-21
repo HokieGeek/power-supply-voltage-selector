@@ -55,5 +55,7 @@ ShiftRegister* const InitShiftRegister(int data, int latchClock, int shiftClock,
 
     InitUsi(0);
 
+    InitUsi(0);
+
     return reg;
 }
