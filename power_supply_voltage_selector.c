@@ -39,6 +39,8 @@
 #define MCP4XXXX_POT_1 1
 #define MCP4XXXX_COMMAND_P0_WRITE 0b00010001
 #define MCP4XXXX_COMMAND_P0_SHUTDOWN 0b00100001
+// #define MCP4XXXX_COMMAND_P0_WRITE 0b10001000
+// #define MCP4XXXX_COMMAND_P0_SHUTDOWN 0b10000100
 
 #define NUM_VOLTAGE_SELECTIONS 5
 #define SELECTED_VOLTAGE_EEPROM_ADDRESS 0b01000000
@@ -94,7 +96,7 @@ BUTTON_ITEM* debouncedButton(int pin) {
 
     if (currentState != btn->state) {
         btn->lastDebounceTime = time;
-    } 
+    }
 
     if (!currentState) {
     // if (bit_is_clear(PINB, btn->pinId)) {
@@ -166,24 +168,24 @@ void voltageSelectionsInit(int numVoltages) {
 
     // Initialize the selections
     //// 3.3v
-    voltageSelections[0].led = 0b01000000;
-    // voltageSelections[0].led = 0b00000010;
+    // voltageSelections[0].led = 0b01000000;
+    voltageSelections[0].led = 0b00000010;
     voltageSelections[0].potData = 43;
     //// 5v
-    voltageSelections[1].led = 0b00100000;
-    // voltageSelections[1].led = 0b00000100;
+    // voltageSelections[1].led = 0b00100000;
+    voltageSelections[1].led = 0b00000100;
     voltageSelections[1].potData = 76;
     //// 9v
-    voltageSelections[2].led = 0b00010000;
-    // voltageSelections[2].led = 0b00001000;
+    // voltageSelections[2].led = 0b00010000;
+    voltageSelections[2].led = 0b00001000;
     voltageSelections[2].potData = 161;
     //// 12v
-    voltageSelections[3].led = 0b00001000;
-    // voltageSelections[3].led = 0b00010000;
+    // voltageSelections[3].led = 0b00001000;
+    voltageSelections[3].led = 0b00010000;
     voltageSelections[3].potData = 224;
     //// Adj
-    voltageSelections[4].led = 0b00000100;
-    // voltageSelections[4].led = 0b00100000;
+    // voltageSelections[4].led = 0b00000100;
+    voltageSelections[4].led = 0b00100000;
     voltageSelections[4].potData = 0;
 }
 
@@ -227,7 +229,8 @@ void MCP4XXXX_send(SpiDevice *const dev, uint8_t command, uint8_t data) {
     input[0] = command;
     input[1] = data;
 
-    SpiWriteBytes(dev, 2, input);
+    // SpiWriteBytes(dev, 2, input);
+    SpiSend16(dev, MCP4XXXX_COMMAND_P0_WRITE, value);
 
     // union { uint16_t bytes; { uint8_t msb, uint8_t lsb }};
     // SpiSend16(dev, MCP41010_COMMAND_BYTE, value);
