@@ -230,10 +230,10 @@ void MCP4XXXX_send(SpiDevice *const dev, uint8_t command, uint8_t data) {
     input[1] = data;
 
     // SpiWriteBytes(dev, 2, input);
-    SpiSend16(dev, MCP4XXXX_COMMAND_P0_WRITE, value);
+    SpiSend16(dev, MCP4XXXX_COMMAND_P0_WRITE, input);
 
     // union { uint16_t bytes; { uint8_t msb, uint8_t lsb }};
-    // SpiSend16(dev, MCP41010_COMMAND_BYTE, value);
+    // SpiSend16(dev, MCP41010_COMMAND_BYTE, input);
 }
 
 void MCP41XXX_shutdown(SpiDevice *const dev) {
@@ -244,25 +244,22 @@ void MCP41010_shutdown(dev) {
     MCP41XXX_shutdown(dev);
 }
 
-void MCP41XXX_write(SpiDevice *const dev, uint8_t value) {
-    MCP4XXXX_send(dev, MCP4XXXX_COMMAND_P0_WRITE, value);
+void MCP41XXX_write(SpiDevice *const dev, uint8_t data) {
+    MCP4XXXX_send(dev, MCP4XXXX_COMMAND_P0_WRITE, data);
 }
 
-void MCP41010_write(dev, value) {
-    SpiWriteBytes(dev, 2, input);
-
-    // union { uint16_t bytes; { uint8_t msb, uint8_t lsb }};
-    // SpiSend16(dev, MCP41010_COMMAND_BYTE, value);
+void MCP41010_write(dev, data) {
+    MCP41XXX_write(dev, data);
 }
 
 void init_pins() {
     shiftReg = InitShiftRegister(HC595_PIN_DATA, HC595_PIN_LATCHCLOCK, HC595_PIN_SHIFTCLOCK, -1);
 
-    spi = InitSoftwareSpi(MCP41010_PIN_CHIPSELECT,
-                          MCP41010_PIN_SERIALCLOCK,
-                          MCP41010_PIN_DATA);
+    // spi = InitSoftwareSpi(MCP41010_PIN_CHIPSELECT,
+                          // MCP41010_PIN_SERIALCLOCK,
+                          // MCP41010_PIN_DATA);
 
-    // TODO: spi = InitSpiMaster(MCP41010_PIN_CHIPSELECT);
+    spi = InitSpiMaster(MCP41010_PIN_CHIPSELECT);
 }
 
 void init_interrupts() {

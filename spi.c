@@ -56,13 +56,12 @@ int IsUsiInitialized = 0;
 // I can't use it to set the MCP41010's 16-bit registers. Still need to do bit-banging.
 void InitUsi(int datamode) {
     if (IsUsiInitialized == 0) {
-        USICR &= ~((1<<USISIE)|(1<<USIOIE)|(1<<USIWM1));
+        // USICR &= ~((1<<USISIE)|(1<<USIOIE)|(1<<USIWM1));
         USICR |= (1<<USIWM0)|(1<<USICS1)|(1<<USICLK);
 
         // USICR |= (1<<USICS0);
 
         // Set SCK and MOSI as output
-        // DDRB |= (1<<PB2)|(1<<PB0)|(1<<chipSelect);
         DDRB |= (1<<USI_SCK_PIN)|(1<<USI_DO_PIN);
         DDRB &= ~(1<<USI_DI_PIN);
 
@@ -74,7 +73,7 @@ uint8_t UsiSend(uint8_t data) {
     USIDR = data;
     USISR = (1<<USIOIF);
 
-    // asm volatile("nop");
+    asm volatile("nop");
     while (!(USISR & (1<<USIOIF))) USICR |= (1<<USITC);
 
     return USIDR;
