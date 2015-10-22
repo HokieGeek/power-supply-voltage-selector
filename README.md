@@ -24,8 +24,9 @@ Trying to learn more electronics by building a circuit that lets me have differe
 * [MIC2940](http://www.micrel.com/_PDF/mic2940.pdf) - Adjustable voltage regulator as target output regulator
 * [MCP41010](http://ww1.microchip.com/downloads/en/DeviceDoc/11195c.pdf) - 10 kΩ digital potentiometer
 * [SN74LS595N](http://www.ti.com/lit/ds/symlink/sn74ls596.pdf) - 8-bit shift registers with latches
+
 ## Discrete components
-* 12v Transformer
+* 12V Transformer
 * 4x 1N4007 Rectifiers
 * 3x 47uF Electrolytic capacitors
 * 3x 0.1uF Ceramic capacitors
@@ -35,6 +36,7 @@ Trying to learn more electronics by building a circuit that lets me have differe
 * 5x 3mm LEDs (green)
 * 1x 3mm LED (red)
 * 1x USB-A Female
+* LED Volt meter thingy
 * Potentiometer
 * Toggle switch
 * Momentatry switch
