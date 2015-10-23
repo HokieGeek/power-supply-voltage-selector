@@ -11698,6 +11698,42 @@ package type P</description>
 <text x="-5.2578" y="-2.54" size="1.778" layer="25" ratio="10" rot="R90">&gt;NAME</text>
 <text x="7.239" y="-2.54" size="1.778" layer="27" ratio="10" rot="R90">&gt;VALUE</text>
 </package>
+<package name="SO-08">
+<description>&lt;B&gt;Small Outline Narrow Plastic Gull Wing&lt;/B&gt;&lt;p&gt;
+150-mil body, package type SN</description>
+<wire x1="-2.9" y1="3.9" x2="2.9" y2="3.9" width="0.1998" layer="39"/>
+<wire x1="2.9" y1="3.9" x2="2.9" y2="-3.9" width="0.1998" layer="39"/>
+<wire x1="2.9" y1="-3.9" x2="-2.9" y2="-3.9" width="0.1998" layer="39"/>
+<wire x1="-2.9" y1="-3.9" x2="-2.9" y2="3.9" width="0.1998" layer="39"/>
+<wire x1="2.4" y1="1.9" x2="2.4" y2="-1.4" width="0.2032" layer="51"/>
+<wire x1="2.4" y1="-1.4" x2="2.4" y2="-1.9" width="0.2032" layer="51"/>
+<wire x1="2.4" y1="-1.9" x2="-2.4" y2="-1.9" width="0.2032" layer="51"/>
+<wire x1="-2.4" y1="-1.9" x2="-2.4" y2="-1.4" width="0.2032" layer="51"/>
+<wire x1="-2.4" y1="-1.4" x2="-2.4" y2="1.9" width="0.2032" layer="51"/>
+<wire x1="-2.4" y1="1.9" x2="2.4" y2="1.9" width="0.2032" layer="51"/>
+<wire x1="2.4" y1="-1.4" x2="-2.4" y2="-1.4" width="0.2032" layer="51"/>
+<smd name="2" x="-0.635" y="-2.6" dx="0.6" dy="2.2" layer="1"/>
+<smd name="7" x="-0.635" y="2.6" dx="0.6" dy="2.2" layer="1"/>
+<smd name="1" x="-1.905" y="-2.6" dx="0.6" dy="2.2" layer="1"/>
+<smd name="3" x="0.635" y="-2.6" dx="0.6" dy="2.2" layer="1"/>
+<smd name="4" x="1.905" y="-2.6" dx="0.6" dy="2.2" layer="1"/>
+<smd name="8" x="-1.905" y="2.6" dx="0.6" dy="2.2" layer="1"/>
+<smd name="6" x="0.635" y="2.6" dx="0.6" dy="2.2" layer="1"/>
+<smd name="5" x="1.905" y="2.6" dx="0.6" dy="2.2" layer="1"/>
+<text x="-2.667" y="-1.905" size="1.27" layer="25" rot="R90">&gt;NAME</text>
+<text x="3.937" y="-1.905" size="1.27" layer="27" rot="R90">&gt;VALUE</text>
+<text x="-1.905" y="-0.635" size="0.4064" layer="48">IPC SO8</text>
+<text x="-1.905" y="0.365" size="0.3048" layer="48">JEDEC MS-012 AA</text>
+<rectangle x1="-2.1501" y1="-3.1001" x2="-1.6599" y2="-2" layer="51"/>
+<rectangle x1="-0.8801" y1="-3.1001" x2="-0.3899" y2="-2" layer="51"/>
+<rectangle x1="0.3899" y1="-3.1001" x2="0.8801" y2="-2" layer="51"/>
+<rectangle x1="1.6599" y1="-3.1001" x2="2.1501" y2="-2" layer="51"/>
+<rectangle x1="1.6599" y1="2" x2="2.1501" y2="3.1001" layer="51"/>
+<rectangle x1="0.3899" y1="2" x2="0.8801" y2="3.1001" layer="51"/>
+<rectangle x1="-0.8801" y1="2" x2="-0.3899" y2="3.1001" layer="51"/>
+<rectangle x1="-2.1501" y1="2" x2="-1.6599" y2="3.1001" layer="51"/>
+<rectangle x1="-1" y1="-1" x2="1" y2="1" layer="35"/>
+</package>
 </packages>
 <symbols>
 <symbol name="MCP41010">
@@ -11708,13 +11744,13 @@ package type P</description>
 <text x="-10.16" y="11.43" size="1.778" layer="95">&gt;NAME</text>
 <text x="-10.16" y="-12.7" size="1.778" layer="96">&gt;VALUE</text>
 <pin name="VDD" x="-12.7" y="7.62" length="short" direction="pwr"/>
-<pin name="PA0" x="12.7" y="-7.62" length="short" direction="pwr" rot="R180"/>
+<pin name="PA0" x="12.7" y="-7.62" length="short" direction="out" rot="R180"/>
 <pin name="/CS" x="12.7" y="7.62" length="short" direction="in" rot="R180"/>
 <pin name="SCK" x="12.7" y="5.08" length="short" direction="in" rot="R180"/>
-<pin name="PB0" x="12.7" y="-2.54" length="short" rot="R180"/>
-<pin name="VSS" x="-12.7" y="-7.62" length="short"/>
-<pin name="SI" x="12.7" y="2.54" length="short" rot="R180"/>
-<pin name="PW0" x="12.7" y="-5.08" length="short" rot="R180"/>
+<pin name="PB0" x="12.7" y="-2.54" length="short" direction="out" rot="R180"/>
+<pin name="VSS" x="-12.7" y="-7.62" length="short" direction="pwr"/>
+<pin name="SI" x="12.7" y="2.54" length="short" direction="in" rot="R180"/>
+<pin name="PW0" x="12.7" y="-5.08" length="short" direction="out" rot="R180"/>
 </symbol>
 </symbols>
 <devicesets>
@@ -11726,6 +11762,24 @@ package type P</description>
 </gates>
 <devices>
 <device name="P" package="DIL8">
+<connects>
+<connect gate="P1" pin="/CS" pad="1"/>
+<connect gate="P1" pin="PA0" pad="5"/>
+<connect gate="P1" pin="PB0" pad="7"/>
+<connect gate="P1" pin="PW0" pad="6"/>
+<connect gate="P1" pin="SCK" pad="2"/>
+<connect gate="P1" pin="SI" pad="3"/>
+<connect gate="P1" pin="VDD" pad="8"/>
+<connect gate="P1" pin="VSS" pad="4"/>
+</connects>
+<technologies>
+<technology name="">
+<attribute name="MF" value="MICROCHIP" constant="no"/>
+<attribute name="MPN" value="MCP41010" constant="no"/>
+</technology>
+</technologies>
+</device>
+<device name="SN" package="SO-08">
 <connects>
 <connect gate="P1" pin="/CS" pad="1"/>
 <connect gate="P1" pin="PA0" pad="5"/>
