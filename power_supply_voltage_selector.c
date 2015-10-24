@@ -40,7 +40,7 @@
 #define MCP4XXXX_COMMAND_P0_WRITE 0b00010001
 #define MCP4XXXX_COMMAND_P0_SHUTDOWN 0b00100001
 
-#define NUM_VOLTAGE_SELECTIONS 5
+#define NUM_VOLTAGE_SELECTIONS 4
 #define SELECTED_VOLTAGE_EEPROM_ADDRESS 0b01000000
 
 typedef struct {
@@ -181,10 +181,6 @@ void voltageSelectionsInit(int numVoltages) {
     voltageSelections[3].led = 0b00001000;
     // voltageSelections[3].led = 0b00010000;
     voltageSelections[3].potData = 224;
-    //// Adj
-    voltageSelections[4].led = 0b00000100;
-    // voltageSelections[4].led = 0b00100000;
-    voltageSelections[4].potData = 0;
 }
 
 void setVoltageSelection(int selection) {

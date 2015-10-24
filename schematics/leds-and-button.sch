@@ -5445,7 +5445,6 @@ Standard schematic elements and footprints for 5mm, 3mm, 1206, and 0603 sized LE
 <part name="R1" library="resistor" deviceset="R-US_" device="0204/2V" value="10k"/>
 <part name="POSTS" library="SparkFun" deviceset="M02" device="PTH"/>
 <part name="METER" library="SparkFun" deviceset="M02" device="PTH"/>
-<part name="ADJV" library="SparkFun-LED" deviceset="LED" device="3MM"/>
 <part name="12V" library="SparkFun-LED" deviceset="LED" device="3MM"/>
 <part name="9V" library="SparkFun-LED" deviceset="LED" device="3MM"/>
 <part name="5V" library="SparkFun-LED" deviceset="LED" device="3MM"/>
@@ -5462,7 +5461,6 @@ Standard schematic elements and footprints for 5mm, 3mm, 1206, and 0603 sized LE
 <instance part="RN1" gate="-2" x="50.8" y="10.16" rot="R270"/>
 <instance part="RN1" gate="-3" x="43.18" y="10.16" rot="R270"/>
 <instance part="RN1" gate="-4" x="35.56" y="10.16" rot="R270"/>
-<instance part="RN1" gate="-5" x="27.94" y="10.16" rot="R270"/>
 <instance part="JP2" gate="G$1" x="20.32" y="5.08"/>
 <instance part="BTN" gate="G$1" x="66.04" y="35.56"/>
 <instance part="IC1" gate="A" x="38.1" y="43.18" rot="R270"/>
@@ -5472,7 +5470,6 @@ Standard schematic elements and footprints for 5mm, 3mm, 1206, and 0603 sized LE
 <instance part="R1" gate="G$1" x="7.62" y="43.18" rot="R180"/>
 <instance part="POSTS" gate="G$1" x="66.04" y="53.34"/>
 <instance part="METER" gate="G$1" x="66.04" y="71.12"/>
-<instance part="ADJV" gate="G$1" x="27.94" y="17.78"/>
 <instance part="12V" gate="G$1" x="35.56" y="17.78"/>
 <instance part="9V" gate="G$1" x="43.18" y="17.78"/>
 <instance part="5V" gate="G$1" x="50.8" y="17.78"/>
@@ -5481,15 +5478,6 @@ Standard schematic elements and footprints for 5mm, 3mm, 1206, and 0603 sized LE
 <busses>
 </busses>
 <nets>
-<net name="N$4" class="0">
-<segment>
-<wire x1="27.94" y1="22.86" x2="27.94" y2="20.32" width="0.1524" layer="91"/>
-<wire x1="35.56" y1="22.86" x2="27.94" y2="22.86" width="0.1524" layer="91"/>
-<pinref part="IC1" gate="A" pin="QF"/>
-<wire x1="35.56" y1="22.86" x2="35.56" y2="30.48" width="0.1524" layer="91"/>
-<pinref part="ADJV" gate="G$1" pin="A"/>
-</segment>
-</net>
 <net name="N$5" class="0">
 <segment>
 <wire x1="35.56" y1="20.32" x2="38.1" y2="20.32" width="0.1524" layer="91"/>
@@ -5647,12 +5635,6 @@ Standard schematic elements and footprints for 5mm, 3mm, 1206, and 0603 sized LE
 <pinref part="POSTS" gate="G$1" pin="1"/>
 <wire x1="73.66" y1="53.34" x2="76.2" y2="53.34" width="0.1524" layer="91"/>
 <label x="76.2" y="53.34" size="1.778" layer="95"/>
-</segment>
-</net>
-<net name="N$1" class="0">
-<segment>
-<pinref part="RN1" gate="-5" pin="1"/>
-<pinref part="ADJV" gate="G$1" pin="C"/>
 </segment>
 </net>
 <net name="N$2" class="0">
