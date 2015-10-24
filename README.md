@@ -2,7 +2,7 @@
 Trying to learn more electronics by building a circuit that lets me have different voltage outputs for use with other prototypes and mostly breadboards
 
 ## Prototype
-![Current progress](http://i.imgur.com/MxiJSQX.jpg)
+![Current progress](http://i.imgur.com/n8TwQP8.jpg)
 
 # Schematics
 ## Selection logic
