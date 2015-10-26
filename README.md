@@ -10,7 +10,7 @@ Trying to learn more electronics by building a circuit that lets me have differe
 ## LEDs, buttons, and outputs
 ![LEDs and Buttons](https://raw.githubusercontent.com/HokieGeek/power-supply-voltage-selector/master/schematics/leds-and-buttons.png)
 
-## Boards
+# Boards
 ## Primary
 ![Main board](https://raw.githubusercontent.com/HokieGeek/power-supply-voltage-selector/master/schematics/voltage-selector-and-output.brd.png)
 ## LEDs, buttons, and outputs
