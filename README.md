@@ -7,13 +7,13 @@ Trying to learn more electronics by building a circuit that lets me have differe
 # Schematics
 ## Primary
 ![Logic schematics](https://raw.githubusercontent.com/HokieGeek/power-supply-voltage-selector/master/schematics/voltage-selector-and-output.png)
-## LEDs, buttons, and outputs
+## Daughter
 ![LEDs and Buttons](https://raw.githubusercontent.com/HokieGeek/power-supply-voltage-selector/master/schematics/leds-and-buttons.png)
 
 # Boards
 ## Primary
 ![Main board](https://raw.githubusercontent.com/HokieGeek/power-supply-voltage-selector/master/schematics/voltage-selector-and-output.brd.png)
-## LEDs, buttons, and outputs
+## Daughter
 ![Board of LEDs and Buttons](https://raw.githubusercontent.com/HokieGeek/power-supply-voltage-selector/master/schematics/leds-and-buttons.brd.png)
 
 # Parts list
@@ -27,15 +27,15 @@ Trying to learn more electronics by building a circuit that lets me have differe
 ## Discrete components
 * 12V Transformer
 * 4x 1N4007 Rectifiers
-* 2x 47uF Electrolytic capacitors
-* 3x 0.1uF Ceramic capacitors
-* 1x 330 Ohm Resistor network (SIL-6)
-* 1x 10 kOhm 5% Resistors
-* 2x 1 kOhm 5% Resistors
-* 4x 3mm LEDs (green)
-* 1x 3mm LED (red)
+* 2x 47 µF Electrolytic capacitors
+* 3x 0.1 µF Ceramic capacitors
+* 1x 330 Ω Resistor network (SIL-6)
+* 1x 10 kΩ 5% Resistors
+* 2x 1 kΩ 5% Resistors
+* 4x 3mm LEDs (green. To indicate selected voltage)
+* 1x 3mm LED (red. To indicate that power is flowing from the wall)
 * 1x USB-A Female
-* LED Volt meter thingy
-* Toggle switch
-* Momentatry switch
-* Jumpers and headers
+* LED Volt meter thingy (slightly redundant with the LEDs...)
+* Toggle switch (turns on Vin)
+* Momentatry switch (selects voltage)
+* Jumpers and headers (Oh my!)
