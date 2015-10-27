@@ -353,7 +353,7 @@ UsedLibrary="/home/andres/Dropbox/ee/schematics/eagle/lbr/microchip-custom.lbr"
 [Win_1]
 Type="Schematic Editor"
 Loc="800 14 1599 899"
-State=0
+State=2
 Number=1
 File="voltage-selector-and-output.sch"
 View="-49.1872 126.942 100.288 231.198"
@@ -401,7 +401,7 @@ Sheet="1"
 [Win_2]
 Type="Board Editor"
 Loc="0 14 799 899"
-State=2
+State=0
 Number=2
 File="voltage-selector-and-output.brd"
 View="-1.09463 -0.6094 55.8262 31.0794"
