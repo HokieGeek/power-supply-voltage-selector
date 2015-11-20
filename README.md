@@ -1,4 +1,4 @@
-# power-supply-voltage-selector
+# power-supply-voltage-selector [![Build Status](https://travis-ci.org/HokieGeek/powers-supply-voltage-selector.svg?branch=master)](https://travis-ci.org/HokieGeek/power-supply-voltage-selector)
 Trying to learn more electronics by building a circuit that lets me have different voltage outputs for use with other prototypes and mostly breadboards
 
 ## Prototype
