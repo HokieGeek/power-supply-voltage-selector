@@ -7,3 +7,4 @@ addons:
     - avr-libc
 script: 
   - make
+  - make size
