@@ -38,7 +38,11 @@ upload: all
 	@echo "== Uploading to chip"
 	sudo avrdude -p $(chip) -P $(port) -c $(programmer) -U flash:w:$(prog).hex
 
+size:
+	@echo "Size of binary: "
+	ls -l $(prog).hex | awk '{ print $5 }'
+
 clean:
 	rm -rf *.{eep,elf,hex,lss,lst,map,o,sym}
 
-.PHONY: all upload clean
+.PHONY: all upload clean size
