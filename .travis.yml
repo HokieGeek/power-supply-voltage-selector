@@ -5,6 +5,6 @@ addons:
     - gcc-avr
     - binutils-avr
     - avr-libc
-script: 
+script:
   - make
   - make size

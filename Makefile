@@ -40,7 +40,7 @@ upload: all
 
 size:
 	@echo "Size of binary: "
-	ls -l $(prog).hex | awk '{ print $$5 }'
+	ls -lh $(prog).hex | awk '{ print $$5 }'
 
 clean:
 	rm -rf *.{eep,elf,hex,lss,lst,map,o,sym}
